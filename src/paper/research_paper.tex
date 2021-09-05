@@ -1,0 +1,734 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[12pt, a4paper, english]{article}
+\usepackage[a4paper,left=3cm,right=3cm,top=3cm,bottom=3cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{float, afterpage, rotating, graphicx}
+
+\usepackage{scrextend,etoolbox}
+
+\makeatletter
+\newenvironment{rotatepage}%
+    {\pagebreak[4]\global\pdfpageattr\expandafter{\the\pdfpageattr/Rotate 90}}%
+    {\pagebreak[4]\global\pdfpageattr\expandafter{\the\pdfpageattr/Rotate 0}}%
+
+\usepackage{epstopdf}
+\usepackage{longtable, booktabs, tabularx}
+\usepackage{fancyvrb, moreverb, relsize}
+\usepackage{eurosym, calc, chngcntr}
+\usepackage{amsmath, amssymb, amsfonts, amsthm, bm}
+% \usepackage{caption}
+\usepackage[singlelinecheck=on]{caption}
+\DeclareCaptionLabelSeparator{periodlargespace}{.\:\:}
+% \usepackage[position=top]{subfig}
+\captionsetup{
+    singlelinecheck=on,
+    figureposition=top,
+    tableposition=above,
+    position=top,
+    format = plain,
+    labelsep = periodlargespace,
+    margin = 0pt,
+    labelfont = {bf},
+    justification = justified
+}
+\usepackage{subcaption}
+
+\usepackage{mdwlist}
+\usepackage{xfrac}
+\usepackage{setspace}
+\usepackage{xcolor}
+\usepackage{nicefrac}
+\usepackage{subfloat}
+\usepackage{todonotes}
+\usepackage{authblk}
+\usepackage{soul}
+\usepackage{pdflscape}
+\usepackage{bbm} 
+\usepackage{multirow}
+\usepackage{minitoc}
+
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  PAGE LAYOUT  and FONT %
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[scaled=.98,sups]{XCharter}% lining figures in math, osf in text
+\usepackage[scaled=1.04,varqu,varl]{inconsolata}% inconsolata typewriter
+\usepackage[type1]{cabin}% sans serif
+\usepackage[libertine,vvarbb,scaled=1.07]{newtxmath}
+\usepackage[cal=boondoxo]{mathalfa}
+\linespread{1.04} % \linespread{1.04}
+\usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+% BIBtex %
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[
+    eprint=false,
+    url=false,
+    doi=false,
+    natbib=true,
+    bibencoding=inputenc,
+    bibstyle=authoryear-comp,
+    citestyle=authoryear-comp,
+    maxcitenames=3,
+    maxbibnames=10,
+    useprefix=false,
+    sortcites=false,
+    backend=biber,
+    uniquelist=false,
+    uniquename=false,
+    % sorting =nyt,
+]{biblatex}
+\AtBeginDocument{\toggletrue{blx@useprefix}}
+\AtBeginBibliography{\togglefalse{blx@useprefix}}
+\setlength{\bibitemsep}{1.5ex}
+\addbibresource{refs.bib}
+
+\usepackage[unicode=true]{hyperref}
+\hypersetup{
+    linkcolor=black,
+    anchorcolor=black,
+    citecolor=black,
+    filecolor=black,
+    menucolor=black,
+    runcolor=black,
+    urlcolor=black
+}
+
+\usepackage{tikz}
+  \usetikzlibrary{arrows}
+\usepackage{graphicx}
+\definecolor{UBonnBlue} {rgb}{.8,.8,.8}%{0,0.25,0.55} % Lorenz' Blue %{cmyk}{1.00, 0.70, 0.00, 0.00}
+\definecolor{UBonnGray} {rgb}{0.4,0.4,0.4}  %{cmyk}{0.52, 0.29, 0.08, 0.00}%{0.00, 0.00, 0.15, 0.55}
+\definecolor{UBonnLightBlue}{rgb}{0,0.25,0.55} % Lorenz' Blue%{cymk}{0.52, 0.29, 0.08, 0.00}
+\definecolor{midblue}{RGB}{0,128,255}
+\definecolor{midblue_light}{RGB}{127,191,255}
+\definecolor{midblue_dark}{RGB}{0,84,170}
+\definecolor{cranberry}{RGB}{193,5,52}
+\definecolor{cranberry_light}{RGB}{223,129,153}
+\definecolor{cranberry_dark}{RGB}{128,2,34}
+
+\widowpenalty=10000
+\clubpenalty=10000
+
+\setstretch{1.5}
+
+
+
+\newcounter{resultnumber}
+\setcounter{resultnumber}{1}
+\newenvironment{result}{\vspace{4ex} \hspace*{0.1cm}\begin{minipage}{15cm}\textbf{Result \theresultnumber:}\em}{\end{minipage}\vspace{4ex}\addtocounter{resultnumber}{1}}
+
+\newcommand\Lukas[1]{\textbf{\color{blue}Lukas: \textit{#1}}}
+
+
+
+
+\date{}
+
+
+
+\begin{document}
+\begin{titlepage}
+
+\title{How Do Parents Perceive the Returns to Parenting Styles and Neighborhoods?}
+
+\author{
+Lukas Kiessling\thanks{Lukas Kiessling: Max Planck Institute for Research on Collective Goods, lukas.kiessling@gmail.com. An earlier draft of this paper circulated in 2019 with the title ``Understanding Parental Decision-making: Beliefs about the Returns to Parenting Styles and Neighborhoods.'' I thank Viola Ackfeld, Anne Ardila Bren\o e, Thomas Dohmen, Lorenz Goette, Joel Kaiyuan Han, Matthias Heinz, Katja Kaufmann, Jonathan Norris, Yasemin Özdemir, Pia Pinger, Sebastian Schneider, Matthias Sutter, as well as audiences at the 5th LEER Conference on Education Economics, the 3rd CRC TR 224 Conference, the 3rd Meeting of the Society of the Economics of the Household (SEHO), the 33th Annual Conference of the European Society of Population Economics (ESPE), and the 31st Conference of the European Association of Labour Economists (EALE) for helpful discussions and suggestions. Funding by the Deutsche Forschungsgemeinschaft (DFG, German Research Foundation) through CRC TR 224 (project A02) is gratefully acknowledged.}
+}
+
+
+\date{
+\today
+}
+
+\vspace{-1cm}
+\maketitle
+\thispagestyle{empty}
+\vspace{-1cm}
+\begin{abstract}\singlespacing
+    \noindent 
+    This paper studies parental beliefs about the returns to two factors affecting the development and long-term outcomes of children: (i) parenting styles defined by warmth and control parents employ in raising children, and (ii) neighborhood quality. Based on a representative sample of 2,119 parents in the United States, I show that parents perceive large returns to the warmth dimension of parenting as well as neighborhood quality, and document that they perceive parenting to compensate for the lack of a good environment. I introduce a measurement error correction to show that perceived returns relate to parents' actual parenting behavior and families' neighborhood choices, but document that beliefs are unlikely to explain existing socioeconomic differences.
+\end{abstract}
+
+
+\small
+\textbf{Keywords:} Subjective expectations, Parenting styles, Neighborhoods, Human capital
+
+\textbf{JEL-Codes:} I24, I26, J13, J24, D19, R23
+
+% I24: Education and inequality
+% I26: Returns to education 
+% J13: Fertility, family planning, childcare, children, youth
+% J24: Human Capital; Skills; Occupational Choice; Labor Productivity
+% D19: Household behavior and Family Economics: Other
+% R23: Urban, Rural, Regional, Real Estate, and Transportation Economics: Regional Migration; Regional Labor Markets; Population; Neighborhood Characteristics 
+\normalsize
+\end{titlepage}
+
+
+\onehalfspacing
+\clearpage
+\section{Introduction}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%% INTRO %%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Parents play a crucial role for the development and success of children, as inequalities can be traced back to early life \citep{FrancesconiHeckman2016,Kalil2015}. 
+Yet, not much is known about the factors determining how parents decide to raise their children. In particular, evidence on the parental decision-making process and the consequences of different parenting styles remains scarce, in part due to their complexity \citep{Attanasio2015}. 
+In a recent study, \citet{DoepkeZilibotti2017} argue that the economic environment creates incentives to engage in different forms of parenting. As parents decide where to live and how to raise their children, it is important to understand how parents perceive their environments and parenting to interact. 
+
+In this paper, I study how parents perceive the returns to two factors affecting the development and long-term outcomes of children: First, I focus on parenting styles describing strategies that parents use in raising their children \citep{Baumrind1967}, and second, I focus on the quality of the neighborhood in which a family lives. In addition, I examine their perceived substitutability or complementarity, analyze the heterogeneity in perceived returns, and investigate their relevance for parents' actual parenting style and neighborhood choices. 
+
+In order to investigate parental beliefs, I adopt a hypothetical scenario approach similar to \citet{CunhaEloCulhane2015}, \citet{BonevaRauh2018}, \citet{Bhalotraetal2017}, and \citet{Attanasioetal2018}. More specifically, I construct eight scenarios in which parents raise their children. Across scenarios, I vary the parenting style that parents adopt---commonly defined as different intensities of warmth and control employed in raising children \citep{MaccobyMartin1983}\footnote{Parenting styles have a long tradition in developmental psychology going back to \citet{Baumrind1967}. \citet{MaccobyMartin1983} extend Baumrind's original typology to four styles defined according to two dimensions: The extent of warmth and control used in raising children. Depending on their intensities, these two dimensions define four distinct parenting styles: authoritative (high warmth, high control), permissive (high warmth, low control), authoritarian (low warmth, high control), and neglecting (low warmth, low control). The psychology literature often refers to these dimensions as responsiveness and demandingness instead of warmth and control.}---as well as the quality of the neighborhoods in which these families live. In addition, I randomize the children's age and gender across respondents. For each of these hypothetical scenarios, I then elicit parental expectations about the future earnings and expected life satisfaction of the child at the age of 30 as proxies for child achievement and well-being in adulthood. This design has several noteworthy features: First, by eliciting parents' beliefs for all eight scenarios and varying one dimensions at a time, I can infer parents' perceived returns to one particular dimension while controlling for (unobserved) heterogeneity across respondents. Second, comparing scenarios that change several factors at the same time allows me to investigate the perceived substitutability or complementarity of parenting styles and neighborhoods. Third, having access to several elicited beliefs per parent, I can estimate how each parent perceives these returns and subsequently link them to their characteristics and actual parenting styles. I implement the hypothetical scenarios in a survey of 2,119 parents with school-aged children in the United States, who are selected to be representative in terms of their gender, age, income, and region. 
+
+I find that parents expect considerable returns to the warmth dimension of parenting, but not to control. An increase of one standard deviation in warmth is associated with parents expecting 15.3 percent higher earnings for children at the age of 30, whereas increasing control is not perceived as yielding any returns. In addition, my estimates show that parents expect earnings to increase by 22.6 percent when raising a child in a relatively good neighborhood. When analyzing the interaction of the different factors, parents seem to adapt their expectations. Parents perceive warmth and control as complements, increasing expected earnings by an additional 4.6 percentage points if combining high levels of both warmth and control. Moreover, parenting is perceived as being more effective in low-quality neighborhoods. The perceived return to warmth (control) is 1.4 (1.5) percentage points higher in low-quality neighborhoods, corresponding to an increase of about a tenth of the perceived return to warmth. Parents therefore expect their parenting to compensate at least in part for deprived environments. In addition, I show that these results are not restricted to the monetary domain, but carry over to perceived returns in the life satisfaction domain.
+
+How do these perceived returns vary by age and gender of the child? First, my results reveal a pronounced age gradient: parents perceive high levels of warmth more effective for younger children, while exerting control is especially important for older, teenage children living in adverse environments. By contrast, the perceived returns do not seem to differ by the child's gender. When studying the heterogeneity in perceived returns by parental characteristics, I find pronounced differences by the parent's gender. Mothers expect higher returns to warmth and neighborhoods than fathers do, while there are no differences in the control dimension of parenting styles. Although there is a large dispersion in perceived returns, I can rule out that other sociodemographic characteristics are systematic associated with perceived returns, which is in line with findings by \citet{Attanasioetal2018}, but contrasts with \citet{BonevaRauh2018}. My findings therefore imply that parental beliefs about the returns to parenting styles and neighborhoods are similar for parents from different socioeconomic backgrounds and thus are unlikely to explain socioeconomic differences in parenting behavior and families' neighborhood choices, although there exist socioeconomic differences in the levels of beliefs.
+
+Despite this absence of socioeconomic differences in perceived returns, they systematically vary: In particular, I show that parenting values---parents' altruism and paternalism towards their own child---are strongly related to perceived returns: Altruistic parents expect high payoffs for being responsive (high warmth) and living in good neighborhoods, while paternalistic parents expect larger returns to exerting control. These patterns therefore provide empirical support for assumptions made in \citet{DoepkeZilibotti2017}, who conceptualize parental altruism and paternalism as key parameters for parents' choice of parenting styles.
+
+Finally, I investigate whether perceived returns are relevant for parents' actual parenting style and neighborhood choices. Importantly, I find that perceived returns to both parenting dimensions are related to actual parenting behavior in the respective dimension: parents who expect larger returns to warmth (control) are more likely to raise their own children with warmth (control). The pattern for perceived returns to neighborhoods and proxies for neighborhood quality are less pronounced. This might partly be due to resource constraints in terms of limited time or money. Specifically, I find that less constrained households show a larger relationship of perceived returns and actual parenting behavior and neighborhood quality. While personal constraints seem to hinder parents to adopt certain parenting styles, financial constraints seem to limit parents' ability to sort into neighborhoods based on their perceived returns. Together, these patterns support that parents hold well-formed beliefs that are relevant for their behavior, but some parents are constrained by limited resources. This is consistent with recent findings from \citet{Bergmannetal2020CMTO} that providing information about high-opportunity areas is not sufficient to induce families to move.
+
+With these results, I contribute to three strands of the literature. First, the paper relates to a growing literature on subjective expectations in the context of human capital formation.\footnote{In particular, this literature studies students' subjective expectations about schooling decisions \citep{Nguyen2008,Jensen2010,AttanasioKaufmann2014,Giustinelli2016} and major choices \citep{Arcidiaconoetal2012,Beffyetal2012,Zafar2013gendergap,StinebrickerStinebricker2014collegemajor,WiswallZafar2015majorchoice,Hastingsetal2016}, or family and job preferences, as well as the resulting gender differences \citep{WiswallZafar2018Jobattributes,WiswallZafar2018family,Bergerhoffetal2018}.} It is most closely connected to studies of parental beliefs about the process of human capital formation pioneered by \citet{CunhaEloCulhane2015}. \citet{BonevaRauh2018} and \citet{Attanasioetal2018} build on their hypothetical scenario approach to study the timing (childhood or adolescence) or type of investment (time or money), while \citet{Bhalotraetal2017} consider different forms of time investments (intensity of breastfeeding and child interaction). By contrast, I hold time investments constant and study a different margin by allowing the mode of interaction, i.e., the parenting style, to vary. The rationale behind this is that a time investment of one hour can have different effects, depending on the intensity of parent-child interactions, and thus I pay attention to the quality rather than the quantity margin of parental investments. 
+
+Apart from analyzing a new and distinct margin of parental beliefs, I also add methodologically to the literature on subjective expectations. Specifically, I demonstrate how eliciting a second belief measure in a different domain allows to recover perceived returns that are domain-independent and corrected for measurement error: While the main belief measure is elicited in the earnings domain as is common in the literature, I elicit a second set of beliefs that measures the returns to the same underlying dimension, but in a different domain (life satisfaction). Using perceived returns from these two domains and applying an error-in-variables IV strategy to correct for measurement error similar to \citet{Gillenetal2018}, I can reduce the attenuation bias that is common in the analysis of subjective expectations.
+
+Second, I contribute to a series of papers explicitly incorporating parenting styles in addition to parental investments in their analyses of child outcomes. These studies analyze the development \citep{FioriniKeane2014,Cunha2015,DelBonoetal2016,Ermisch2008,Cobb-Clark2018} and intergenerational transmission of skills and preferences \citep{Zumbuehletal2018,Deckersetal2017Balu,BrenoeEpper2019,Kiesslingetal2021PP}, a child's behavior \citep{DooleyStewart2007} or school outcomes \citep{Cosconati2012}. While these papers, as well as the developmental psychology literature, are primarily concerned with the consequences of particular investments or parenting styles for child outcomes, \citet{DoepkeZilibotti2017} choose a different approach. They focus on parental decision-making and argue that economic incentives created by the environment shape parents' parenting style choices.\footnote{In particular, their model focuses on inequality and occupational mobility (in terms of an incumbency premium) as two features of the environment that create such incentives. Using data from the World Value Survey, \citet{DoepkeZilibotti2017} provide cross-country evidence that these two measures correlate with average parenting styles in a country. \citet{Agostinellietal2020} build on this idea and study the interaction of parenting styles and peer effects, and thus highlight very specific and local neighborhoods of school peers. \citet{Cuellaretal2015} review the psychological literature on the relationship between parenting styles and neighborhoods. While a general finding in developmental psychology is that an authoritative form of parenting is most effective in raising successful children, there exists a large variety in adopted parenting styles \citep[e.g.,][]{Dornbuschetal1987,Lambornetal1991,Steinbergetal1991,ChanKoo2011}. The present study focuses on parental perceptions of these interactions.} The present paper complements these papers by presenting evidence on the perceived long-term consequences of different parenting styles in two relevant domains---earnings and life satisfaction---and show that these perceived returns are informative for parents' actual parenting style choices. Moreover, my results provide support for modeling choices made in \citet{DoepkeZilibotti2017}, namely that parental altruism and paternalism are key to understanding the choice of parenting styles.
+
+Lastly, the paper relates to the literature showing how neighborhoods affect long-term outcomes of children \citep[see, e.g.,][for evidence that neighborhoods affect a variety of social and economic outcomes]{ChettyHendren2018Exposure,ChettyHendren2018County,Chettyetal2018OpportunityAtlas,Deutscher2019,ChynKatz2021} and the literature that analyzes parents' behavioral responses to neighborhoods. \citet{Klingetal2005}, \citet{PopElechesUrquiola2013}, and \citet{Han2019} provide evidence that parents are more involved in their children's upbringing in low-quality neighborhoods. By contrast, \citet{PatacchiniZenou2011} suggest that parental involvement actually increases with neighborhood quality. I contribute to this discussion by providing first evidence on parental perceptions of both neighborhood effects, as well as their interactions with parenting decisions. Collectively, these studies as well as my paper therefore suggest that the way in which parents raise their children interacts with neighborhood quality, thus pointing towards an additional mediator of neighborhood effects besides schools \citep[e.g.,][]{Laliberte2018} or peers \citep[e.g.,][]{Agostinelli2018}. This interaction between neighborhoods and parenting might also help to explain why many studies find more pronounced effects for children, rather than their parents \citep[e.g.,][]{Chettyetal2016MTO,Chyn2018,Deutscher2019,Nakamuraetal2021}. 
+
+In the next section, I describe the main survey instrument as well as the data collection process. Section~\ref{sec:empiricalstrategy} describes the empirical strategy. In Section~\ref{sec:results}, I document parents' beliefs about the returns to parenting styles and neighborhoods, before Section~\ref{sec:determinants} turns to an individual-level analysis. Section~\ref{sec:predictivepower} examines the relevance of individual perceived returns for parental decision-making. Finally, Section~\ref{sec:conclusion} concludes. 
+
+\section{Survey description and data}\label{sec:surveydescription_data}
+\subsection{Survey instrument}
+Analyzing parental beliefs is difficult for several reasons: First, inferring beliefs from observed behavior can be challenging, as different sets of preferences and beliefs can in principle rationalize a given action \citep{Manski2004}.\footnote{In general, any observed choice may be consistent with different combinations of preferences and beliefs. \citet{Manski2004} therefore argues that one cannot solely rely on observed behavior to infer underlying beliefs, and advocates for a direct elicitation of beliefs.} Second, eliciting beliefs only about the consequences of one's own actual parenting style ignores important counterfactual beliefs that are an integral part of the decision-making process \citep{Arcidiaconoetal2012}. Third, collecting beliefs about the parents' own behavior towards their children might trigger motivated or self-serving beliefs, resulting in over- or understating of their beliefs. In order to circumvent these issues, I adopt a hypothetical scenario approach used by, e.g., \citet{CunhaEloCulhane2015}, \citet{BonevaRauh2018}, \citet{Attanasioetal2018}, as well as \citet{Bhalotraetal2017}, and elicit beliefs about the consequences of different parenting styles and neighborhoods directly. These scenarios have the advantage of allowing me to elicit returns over different dimensions and counterfactuals by varying one dimension at a time while holding other factors constant. In addition, by asking about the consequences of a hypothetical family, I reduce the scope for self-serving beliefs.
+
+The survey instrument consists of different scenarios varying the parenting style of parents, as well as the quality of the environment in which a family is living. I adopt the typology of parenting styles introduced by \citet{Baumrind1967} and further specified by \citet{MaccobyMartin1983} and vary whether parents raise their children with high or low warmth, as well as high or low control. The combination of these two dimensions results in four distinct parenting styles: neglecting (low warmth, low control), authoritarian (low warmth, high control), permissive (high warmth, low control), and authoritative (high warmth, high control). In order to study how the effectiveness of these different parenting styles depends on the quality of the neighborhood, I elicit parents' expectations about the consequences of the four parenting styles in two different environments: one neighborhood (the ``good'' neighborhood) describes an environment with low unemployment and little crime, while the other has relatively high unemployment and more crime (``bad'' neighborhood). This allows me to test whether parents believe that the effectiveness of different parenting styles hinges on the environment in which a family is living, as suggested in \citet{DoepkeZilibotti2017}. Moreover, this enables me to examine whether parents perceive one parenting style as optimal, independently of the socioeconomic environment. Table~\ref{tab:scenarios} summarizes the resulting eight scenarios.
+
+\begin{table}[h!]\centering
+\caption{Survey scenarios}\label{tab:scenarios}
+\begin{tabular}{c|c|c p{0.5cm} c|c|c}
+\multicolumn{3}{c}{Bad neighborhood ($n^L$)} & & \multicolumn{3}{c}{Good neighborhood ($n^H$)} \\
+\multicolumn{7}{c}{ }\\
+                        & Low               & High          & &                         & Low               & High              \\
+                        & control   & control & &                       & control   & control   \\
+                        & ($c^L$)   & ($c^H$) & &                       & ($c^L$)   & ($c^H$) \\\cline{1-3}\cline{5-7}
+Low \,warmth    & \multirow{2}{*}{$y_1$}             & \multirow{2}{*}{$y_2$}         & & Low \,warmth  & \multirow{2}{*}{$y_5$}             &\multirow{2}{*}{ $y_6$}             \\
+ ($w^L$)        &              &               & & ($w^L$)  &              &              \\\cline{1-3}\cline{5-7}
+High \,warmth   & \multirow{2}{*}{$y_3$}             & \multirow{2}{*}{$y_4$}         & & High \,warmth & \multirow{2}{*}{$y_7$}             & \multirow{2}{*}{$y_8$}             \\
+ ($w^H$)        &              &         & & ($w^H$) &              &              \\
+\multicolumn{7}{c}{ }\\
+\end{tabular}
+\vspace{0.5em}
+\caption*{\footnotesize \textbf{Notes:} This table summarizes scenarios $j$ ($j=1,\ldots,8$) in which respondents are asked to provide expected earnings for children at age 30 ($y_j$) for different parenting style combinations (low and high warmth/control) and neighborhoods (low or high neighborhood quality).}
+\end{table}
+
+More specifically, I present respondents two hypothetical average American families, each having a single child whose age and gender are randomly determined, as described below. The two families differ only in the neighborhood in which they are living. One family, the ``Joneses'', lives in a good neighborhood that has a relatively low unemployment rate (2\%), as well as a low crimes rate (10 violent crimes per 10,000 inhabitants). The other family, the ``Smiths'', lives in a relatively deprived neighborhood with higher unemployment (10\%), as well as a higher crime rate (60 violent crimes per 10,000 inhabitants).\footnote{The idea is that unemployment and crime rates correspond to measures of a latent neighborhood quality factor that potentially subsumes other facets (e.g., school quality or the availability of amenities). Similar proxies for neighborhood quality have been used before \citep[e.g.,][]{Han2019}.} The scenarios stress that apart from living in different neighborhoods, both families have similar levels of education and income, and both families invest equal levels of time and money in their children. 
+
+In addition, I vary the warmth and control dimension of parenting styles across scenarios. In order to describe different parenting styles, I adopt descriptions based on established measures of parenting styles for warmth and control. Specifically, I conducted a pilot study in which I tested several descriptions of behaviors corresponding to the two parenting style dimensions, and chose the item that had the highest predictive power for each dimension. Furthermore, this pilot study elicited the frequency distributions of the respective behaviors, which I used to calibrate the differences between scenarios to one standard deviation. This procedure yields four parenting styles varying the level of warmth and control: neglecting (low warmth, low control), permissive (high, low), authoritarian (low, high), and authoritative parenting (high, high).
+
+Taken together, the hypothetical scenarios vary (a) the parenting style a family adopts by varying the intensity of the two dimensions warmth and control from low to high, and (b) the quality of the family's neighborhood (``good'' or ``bad'' characterized by high or low unemployment and crime). Appendix \ref{app:scenario_text} presents the wording of the scenarios. An important feature is that respondents are asked not only about one of the scenarios, but answer all of them. This allows me to infer the perceived returns over all three dimensions warmth, control, and neighborhood quality for each individual. By comparing individual responses across these scenarios, I am able to infer perceived returns of the three dimensions as well as their relationship in terms of their perceived substitutability and complementarity. 
+In Appendix~\ref{app:theoreticalframework}, I outline a brief theoretical framework that shows how the comparisons of these scenarios allow me to infer perceived returns to living in good neighborhoods and parenting styles, as well as their relation in terms of their substitutability and complementarity.
+
+\subsection{Outcomes}
+The survey instrument elicits respondents' expectations for two outcomes of the hypothetical children at age 30. First, as a main outcome, I elicit parents' expectations about the expected gross yearly earnings of the children in terms of today's USD if they are working full-time. This measure allows me to calculate monetary returns over the different domains. I also elicit the expected life satisfaction at age 30 as a second outcome (measured on a scale from 1, low, to 100, high) to test whether the inferred returns carry over to other domains. Moreover, I combine both measures to correct for measurement error as I describe in Section~\ref{sec:empiricalstrategy}.
+
+\subsection{Randomization}
+In order to analyze the extent to which parental beliefs depend on the characteristics of the child, I implement two randomizations at the respondent-level: First, I randomly determine the gender of the child. One group answers the scenarios in which both families have sons (``John'' or ``Simon''), while for another group, the families have daughters (``Emily'' or ``Sarah'').\footnote{These names correspond to the most popular names at the beginning of the 2000s, i.e., at a time when the hypothetical children of the scenarios were born.} By comparing elicited beliefs between respondents seeing a son or a daughter, I can study gender differences in perceived returns. Second, I randomize the age of the child in the scenarios between 6 and 16 years. The rationale for this is to analyze whether specific parenting styles are perceived more effective in certain periods as the literature on parental investments has identified periods during childhood which are crucial for skill development and long-term outcomes of children \citep{CunhaHeckman2007,Cunhaetal2010}. Similarly, this helps to analyze whether parents perceive neighborhoods to be particularly important at certain ages.
+
+\subsection{Additional survey elements}
+In addition to the hypothetical scenarios described above and standard socioeconomic characteristics, the survey elicits respondents' actual parenting styles. To do this, I adopt two established measures of parenting styles as used in the German Socioeconomic Panel Study (SOEP). In particular, I use the short versions of the warmth and control dimension of parenting styles employing three- and four-items scales based on \citet{Perrisetal1980} and \citet{Schwarzetal1997}, respectively. Moreover, I elicit several parenting values such as the parents' belief about the malleability of their child's skills, as well as the degree of altruism and paternalism towards their children.\footnote{These values are measured using the agreement of parents to the following statements: ``I am usually willing to sacrifice my own desires to satisfy those of my child'' (altruism), ``As a parent, I sometimes need to be strict if my child acts against what I think is good for it'' (paternalism), and ``My child develops at its own pace, and there is not much I can do about that'' (malleability of skills).}
+
+Furthermore, I ask parents to assess the quality of the neighborhood in which they are living by eliciting their agreement to the three statements (i) ``My neighborhood is a good place to raise children'', (ii) ``I feel safe in my neighborhood'', and (iii) ``My child attends a school of good quality''. I then extract a factor from these three items as a measure of subjective neighborhood quality. Additionally, based on respondents' postcodes, I can link several neighborhood characteristics provided by \citet{ChettyHendren2018Exposure,ChettyHendren2018County}.
+
+\subsection{Summary statistics}\label{sec:summarystatistics}
+In October and November 2018, I collected a sample of 2,119 parents in the United States in collaboration with the market research company \textit{Research Now} (now called \textit{Dynata}). To be eligible to take part in the study, respondents have to share a household with at least one child aged 6 to 16, and respondents were sampled to be representative in terms of their gender, age, household income, and geographic distribution. Table~\ref{tab:summary_statistics} presents sociodemographic statistics of the final sample and the Current Population Survey (CPS): 61\% of the respondents are female, with an average age of 40 years. The average household has an annual income of USD 82,644 and matches the geographic distribution across census regions similar to the Current Population Survey (CPS). Moreover, the sample also matches several non-targeted characteristics, such as the share of married respondents (75\%) and the average number of children (2.13), but has slightly higher level of education and a lower level of employment than the CPS sample.
+
+\begin{table}[h!]
+    \caption{Summary statistics}\label{tab:summary_statistics}
+    \centering\small
+        \input{../../out/tables/summary_statistics.tex}
+    \vspace{0.5em}
+    \caption*{\footnotesize \textbf{Notes:} This table presents summary statistics of the sample collected for this study and representative statistics of American parents based on the Current Population Survey (CPS).}
+\end{table}
+
+\section{Empirical strategy}\label{sec:empiricalstrategy}
+In order to analyze parental beliefs, I estimate the perceived returns to different parenting styles and neighborhoods by comparing an individual's beliefs in different scenarios to each other. I therefore identify perceived returns from the within-respondent variation in beliefs. More specifically, let $w_j$ and $c_j$ be equal to 1 if scenario $j$ corresponds to a parenting style with high warmth or high control, respectively, and zero otherwise. Analogously, let $n_j$ be equal to 1 if scenario $j$ corresponds to a high-quality neighborhood, and zero otherwise. Moreover, $y_{ij}$ denotes respondent $i$'s expectation over the gross yearly earnings of a child at age 30 in scenario $j$. My main specification is then given by
+\begin{align}
+    \begin{split}\label{eq:main}
+  \log(y_{ij}) &= \beta_w w_j + \beta_c c_j + \beta_n n_j  \\
+     &\quad + \beta_{wc} (w_j \times c_j) 
+     + \beta_{wn} (w_j \times n_j) 
+     + \beta_{cn} (c_j\times n_j) + f_i(X_i) + \epsilon_{ij}.
+     \end{split}
+\end{align} 
+The coefficients of interest are $\beta_w,\ldots,\beta_{cn}$, which describe the parents' perceptions about the returns to the different factors. While $\beta_{k}$ with $k$ = $w$, $c$, $n$ denote the first-order returns to warmth, control, and neighborhoods, the coefficients on the interaction terms ($k$=$wc$, $wn$, $cn$) capture whether two dimensions are complements ($\beta_{k}>0$) or substitutes ($\beta_{k}<0$). Positive coefficients on interaction effects therefore imply that parents expect the return of two dimensions to increase when they are paired; negative coefficients mean that the returns are jointly lower than separately. The term $f_i(X_i)$ either controls for a vector of individual-specific characteristics ($f_i(X_i)=X_i^{\prime}\gamma$) or individual fixed effects ($f_i(X_i)=\gamma_i$) to absorb any observed or unobserved heterogeneity across individuals, respectively. Finally, $\epsilon_{ij}$ is an idiosyncratic error term clustered on the individual level. 
+
+Estimating equation~\eqref{eq:main} on the whole sample yields perceived returns to parenting and neighborhoods for a representative set of parents in the United States. In the second part of the analysis, I will also lever the individual panel dimension of the data to infer individual-level perceived returns that I can subsequently link to their determinants and actual decision-making. For this, I estimate equation~\eqref{eq:main} for each respondent separately (omitting $f_i(X_i)$), and winsorize the resulting returns at the 1 and 99\% level to account for outliers. This recovers individual-level perceived returns denoted by $R_{\text{warmth},i}$, $R_{\text{control},i}$, and $R_{\text{neighb.},i}$ for warmth, control, and neighborhoods. In order to study whether and to what extent perceived returns are related to parental characteristics, I estimate
+\begin{align}
+    R_{k,i} = \alpha_0 + \alpha_1 X_{i} + \eta_{k,i}, \label{eq:determinants}
+\end{align}
+in which $R_{k,i}$ denotes the perceived return of individual $i$ to dimension $k\in\{$warmth, control, neighborhood$\}$ and $X_i$ is a vector of parental characteristics. I consider two sets of variables: First, I employ sociodemographic characteristics such as gender, age, and education; second, I associate returns with respondents' parenting values (malleability of skills, altruism, and paternalism towards a child). In equation~\eqref{eq:determinants}, $\alpha_1$ informs about the importance of parental characteristics $X_{i}$ to explain parents' perceived returns.
+
+In a last step, I aim at examining the relevance of these perceived returns for parents' actual parenting styles and neighborhood assessments. However, two issues complicate this analysis. First, parents likely take other dimensions apart from expected earnings (as a proxy of child achievement) into account when deciding about their parenting style. Second, I estimate individual-level perceived returns on a small number of observations only and therefore they likely suffer from sizable measurement error. In the following, I outline an instrumental variable strategy to reduce this measurement error and recover a more general notion of perceived returns that is not restricted to a single domain. To do so, I lever that I elicit beliefs in two distinct domains and isolate their common variation: one set captures parental beliefs in the earnings domain, while the other one elicits the corresponding beliefs in the life satisfaction domain. These two domains are likely correlated, but capture distinct facets of returns to parenting and neighborhoods (child achievement and child well-being). 
+
+This IV strategy closely follows \citet{Gillenetal2018}, who termed this the ``obviously related instrumental variables'' approach. In a first step, I duplicate observations yielding 2$N$ observations. I then use the perceived returns in each domain ($R_{k,i}^{d}$ with $d\in\{E,LS\}$ for the earnings ($E$) and life satisfaction ($LS$) domain, respectively) once as a regressor and once as an instrument. 
+
+The outcome in these regressions are standardized measures of actual parenting styles, subjective and objective measures of neighborhood quality. The parenting style measures correspond to the first principal components when performing a factor analysis on the four (three) items of the warmth (control) parenting style scale elicited in the survey.\footnote{Appendix Figure~\ref{fig:screeplot} and Appendix Table~\ref{tab:factorloadings} show that an exploratory factor analysis on all seven items indeed recovers two factors corresponding to warmth and control from the set of survey items used to elicit a respondent's parenting style.} To measure the quality of a neighborhood, I use two sets of measures. First, I extract a factor from three subjective assessments answered on a 5-point Likert scale: (i) ``My neighborhood is a good place to raise children'', (ii) ``I feel safe in my neighborhood'', and (iii) ``My child attends a school of good quality''. Second, based on respondents' zipcodes, I merge county-level neighborhood characteristics from \citet{ChettyHendren2018Exposure,ChettyHendren2018County} to my survey data, and perform an additional factor analysis resulting in two factors: a first factor capturing local economic conditions in a neighborhood, and a second factor related to measures of segregation and urbanization.\footnote{Figure~\ref{fig:screeplot_nb} presents the corresponding scree plot of this factor analysis, while Table~\ref{tab:factorloadings_nb} shows the rotated factor loadings of the underlying items. One caveat of this approach is that some neighborhood characteristics are based on historical data and thus may have changed over time. Yet, \citet{Chettyetal2018OpportunityAtlas} document that these characteristics are relatively stable over time and good predictors of today's conditions.}
+
+For each of these outcomes, $y_i$, I estimate
+\begin{align}
+    &\left(\begin{array}{c}y_{i}\\y_{i}\end{array}\right) = \left(\begin{array}{c}\delta_0^{E}\\ \delta_0^{LS}\end{array}\right) + \delta_1 \left(\begin{array}{c}R_{k,i}^{E}\\R_{k,i}^{LS}\end{array}\right) + \left(\begin{array}{c}\delta_2^{E}X_i\\\delta_2^{LS}X_i\end{array}\right) + \nu_{k,i} \label{eq:predictivepower}\\
+    &\text{instrumenting } \left(\begin{array}{c}R_{k,i}^{E}\\ R_{k,i}^{LS}\end{array}\right) \text{ with } Z=\left(\begin{array}{cc}R_{k,i}^{LS} & 0_{N} \\ 0_{N} & R_{k,i}^{E}\end{array}\right). \nonumber
+\end{align}
+
+Some remarks are in order. First, this specification remains agnostic about the importance of both domains, but instead estimates the \textit{joint} coefficient of perceived returns in the earnings and life satisfaction domain. In fact, the coefficient $\delta_1$ represents the average of separate IV estimates and yield a consistent estimate of $\delta_1$ \citep[see][]{Gillenetal2018}. Second, to take into account that each observation appears twice, I bootstrap standard errors. Third, \citet{Gillenetal2018} propose this strategy to elicit several measurement of the same construct (e.g., risk preferences in several experiments). In contrast, I elicit a measurement in a different domain and use this IV strategy to obtain the measurement error-corrected latent return independently of any particular domain.\footnote{One drawback of my approach is that I elicit parental beliefs in both domains in the same survey. Thus, the IV strategy employed here does not help to reduce survey-based measurement error. Ideally, one would elicit both belief domains twice in two separate surveys, which was not possible for logistical reasons.}
+
+\section{Parental beliefs about the effectiveness of parenting styles and neighborhoods}\label{sec:results}
+\subsection{Representative evidence on perceived returns}\label{sec:averagebeliefs}
+How do parents' expectations vary over the scenarios, and what returns do they associate with different parenting styles and neighborhoods? Figure~\ref{fig:mainresults} depicts the mean parental beliefs for each of the eight scenarios from Table~\ref{tab:scenarios}. Several findings emerge. First, average parental beliefs for earnings of a child at age 30 vary strongly across scenarios ranging between USD 40,000 and USD 57,000, with an average of USD 47,810.\footnote{Conditional on working, respondents in the CPS earn approximately USD 46,200 at age 30 indicating that parents' beliefs are well-calibrated on average.} Second, comparing the same parenting styles across neighborhoods reveals that parents expect large returns to neighborhoods. Being raised in a relatively good neighborhood increases expected earnings by USD 7,000 to USD 8,000 on average. Third, there are sizable returns to different parenting styles. In particular, parents expect authoritative parenting with high levels of warmth and control to compensate partly for raising children in low-quality neighborhoods. Moreover, the patterns suggest that the different dimensions interact with each other.
+
+\begin{figure}[h!]
+    \caption{Parental beliefs about expected earnings}\centering\label{fig:mainresults} 
+    \includegraphics[width=0.85\textwidth]{../../out/figures/expected_earnings.pdf} 
+    \caption*{\footnotesize \textbf{Notes:} This figure presents parents' expectations about a child's earnings at age 30 in each of the eight scenarios ($y_j$, $j=1,\ldots,8$). The first four bars correspond to scenarios with low neighborhood quality, while the latter four bars correspond to scenarios with high neighborhood quality. Moreover, $w^k c^l$ ($k,l$ = L, H) indicate different parenting styles with a low ($w^{\text{L}}$) or high level of warmth ($w^{\text{H}}$) and a low ($c^{\text{L}}$) or high level of control ($c^{\text{H}}$), respectively; cf. Table~\ref{tab:scenarios}. Error bars indicate standard errors to the mean.}
+\end{figure}
+
+In order to analyze these patterns in more detail, Table~\ref{tab:mainresults} presents OLS estimates as specified in equation~\eqref{eq:main}. In columns (1) through (3), I focus on perceived returns to primary dimensions only, while columns (4) to (6) acknowledge the presence of interactions between different dimensions of parenting styles as well as neighborhoods. Finally, column (7) investigates the interaction of all three dimensions and measures the additional perceived return to authoritative parenting (high warmth and high control) in good neighborhoods.
+
+I find that parents perceive large returns to the warmth and neighborhood dimensions, but no returns from exerting control. Increasing the warmth dimension of parenting by one standard deviation in column (1) increases a child's expected earnings by 16.9 percent, while the estimated perceived return to control is statistically indistinguishable from zero with a 95\% confidence interval ranging from -0.2 to 1.2 percent. The perceived return to neighborhoods amounts to 21.1 percent. Neither the inclusion of sociodemographic controls in column (2) nor taking out all individual-level unobserved heterogeneity by including individual fixed effects in column (3) affects the estimated perceived returns to warmth, control, and neighborhoods.
+
+\begin{table}[h!]
+    \caption{Parental beliefs about the returns to parenting styles and neighborhoods}\label{tab:mainresults}
+    \resizebox{\textwidth}{!}{
+        \input{../../out/tables/scenarios_w.tex}
+    }
+    \vspace{0.5em}
+    \caption*{\footnotesize \textbf{Notes:} This table presents least squares regressions of log earnings expectations based on equation~\eqref{eq:main}. Columns (1) through (3) focus on first-order effects. Columns (4) to (6) additionally include two-way interactions, while column (7) also adds a three-way interaction of warmth, control and neighborhoods. Columns (1) and (4) do not include any controls, columns (2) and (4) include respondent's age and gender, as well as indicators for being white, having a college degree, being employed, and being a single parent, log-household income, number of children in the household, and the share of children being female as control variables. Columns (3), (6), and (7) include individual fixed effects. Standard errors clustered by respondent in parentheses. *, **, and *** denote significance at the 10, 5, and 1 percent level.}
+\end{table}
+
+Including interaction effects in columns (4) through (6), I find that the primary effects on the dimensions are similar to the previous estimates without interactions. When considering interaction terms, the estimates reveal a perceived complementarity between warmth and control. Parents expect an additional return of 4.6 percentage points if children are raised with high levels of \textit{both} warmth and control. Hence, parents expect authoritative forms of parenting (i.e., high warmth and high control) to be most effective for children's long-term success. This is similar to what has been found in the psychology literature \citep{Dornbuschetal1987,Baumrind1967,Lambornetal1991}. Interestingly, there are negative interactions of good neighborhoods with warmth and control. Thus, parents perceive parenting to be \textit{more} important in relatively adverse environments and less necessary if the surrounding conditions are favorable. In other words, respondents expect parenting partly to compensate for the lack of a beneficial neighborhood. These findings are consistent with parents becoming more involved in raising their children when the quality of a neighborhood decreases \citep[e.g.,][]{Klingetal2005,PopElechesUrquiola2013,Han2019}.\footnote{For example, \citet{Klingetal2005} provide evidence that families in high-poverty neighborhoods spend a large fraction of their time monitoring their children and keeping them safe, i.e., they exert high levels of control in raising them.} 
+
+Finally, the main conclusions in column (7) remain similar to the previous results, but the additional triple interaction shows that parents perceive the complementarity of warmth and control to be stronger in favorable neighborhoods compared to detrimental ones. Thus, parents perceive neighborhoods and intensive parenting (i.e., authoritative parenting styles) as complements. As far as these perceptions correspond to actual returns, this result suggests that increasing segregation may help to explain why the rich adopt relatively more intensive parenting styles with higher investments, while the poor invest less as returns to parenting may be lower \citep[see also the discussion in][]{Doepkeetal2019}. Moreover, this helps to reconcile the finding of cultural complementarity in \citet{PatacchiniZenou2011} with other studies documenting substitution effects between neighborhoods and parenting \citep[e.g.,][]{PopElechesUrquiola2013} and my previous findings. While parents may try to compensate for the lack of a good environment by increasing their involvement in raising children, living in a high-quality neighborhood may induce an additional complementarity for very intensive forms of parenting (e.g., authoritative parenting). Thus, previous studies may have reached different conclusion of about the relationship between parenting and neighborhood quality by looking at different parenting behaviors.
+
+\subsection{Perceived returns by the child's gender and age}\label{sec:gender_age_randomization}
+While the previous estimates are average returns across all scenarios, the randomizations in the survey allow me to study the heterogeneity in perceived returns by children's gender and age. Columns (1) to (3) of Table~\ref{tab:split_gender_age} document that parents expect boys to earn more than girls when they are grown up. They expect boys to earn on average 49,492 USD and girls to earn around 7\% less (46,123 USD). Despite these level differences, I do not find evidence for differences in the perceived returns across gender. Nonetheless, there are significant changes in perceived returns when varying the age of the child. More specifically, the warmth dimension becomes less important the older the child is, according to parents' expectations. While for 6 to 9-year-old children a standard deviation increase yields a perceived return of 18.6 percent, it amounts to only 14.7 and 12.7 percent, respectively, for 10 to 12-year-old and 13 to 16-year-old children (corresponding t-tests of the difference between coefficients yield p-values of $p=0.060$ and $p=0.003$). In line with county exposure effects in \citet{ChettyHendren2018Exposure}, I do not find evidence of perceived critical age effects, during which living in certain neighborhoods is crucial for long-run outcomes. Rather, I find that parents perceive the interaction of the control dimension of parenting and neighborhoods to be of particular importance for older children. More specifically, parents associate control to yield an additional 2.9 percentage point return in adverse environments for the oldest age group in my sample. By contrast, there is no such effect for the youngest age group (test of the difference between coefficients: $p=0.042$). Thus, parents adapt their return expectations to characteristics of children, such as their age.
+
+\begin{sidewaystable}
+  \caption{Perceived returns by the child's gender and age}\label{tab:split_gender_age}
+  \resizebox{0.95\textwidth}{!}{
+        \input{../../out/tables/scenarios_w_gender_age.tex}
+  }
+  \vspace{0.5em}
+  \caption*{\footnotesize \textbf{Notes:} This table presents least squares regressions of log earnings expectations based on equation~\eqref{eq:main} for different sample splits according to the child's gender (columns 1 and 2) and age group (columns 4-6). Reported p-values stem from t-tests of interaction terms in fully interacted regression models. All specifications include individual fixed effects. Standard errors clustered by respondent in parentheses. *, **, and *** denote significance at the 10, 5, and 1 percent level.}
+\end{sidewaystable}
+
+\subsection{Robustness checks using different sample restrictions}\label{sec:robustness_sample}
+In Table~\ref{tab:robustness}, I check the robustness of my main findings by restricting the sample in various ways. First, I restrict the sample in column (1) to those respondents who report being one of the main caregivers of the child. Second, after eliciting expectations in the scenarios, I asked how certain parents were about their responses and exclude in column (2) those who report being uncertain or very uncertain. Third, it is possible that respondents either pay little attention and quickly click through the survey or simply perform other activities besides answering the survey. Hence, column (3) excludes respondents with the 5\% lowest and highest response times. Fourth, families actively decide where to move and thus their location decision is endogenous. If they do so due to having different beliefs or if moving to a different neighborhood affected their beliefs, this might change their perceptions about returns to parenting and neighborhoods. Column (4) therefore focuses on those respondents that indicated that they moved in the last five years (45.5\% of the sample). Finally, I focus on those respondents who have children similar to those in the scenarios and potentially beliefs that are more accurate. Thus, columns (5) through (7) restrict the sample to those who have children of the same gender, the same age group, or both the same gender and age group as the children in the scenarios.
+
+\begin{table}[h!]
+    \caption{Robustness of perceived returns for different samples}\label{tab:robustness}
+    \resizebox{\textwidth}{!}{
+        \input{../../out/tables/scenarios_w_robustness.tex}
+    }
+    \vspace{0.5em}
+    \caption*{\footnotesize \textbf{Notes:} This table presents least squares regressions of log earnings expectations based on equation~\eqref{eq:main}. Column (1) restricts the sample to respondents who are main caregivers to their children. Column (2) excludes parents who report being uncertain about their responses. Column (3) excludes respondents with the 5\% highest and lowest response times. Column (4) restricts the sample to respondents that indicate that they have moved in the last five years. Columns (5) to (7) restricts the sample to parents whose children and the child in the scenario have the same characteristics in terms of gender (column 5), age group (column 6), and gender, as well as age group (column 7). All specifications include individual fixed effects. Standard errors clustered by respondent in parentheses. *, **, and *** denote significance at the 10, 5, and 1 percent level.}
+\end{table}
+
+As shown in Table~\ref{tab:robustness}, neither excluding non-main caregivers, focusing on certain respondents only, or removing respondents with very short or long response times affects the estimates in columns (1) through (3). Those respondents that moved within the last five years perceive the first-order returns to different dimensions of parenting styles as well as to living in a better neighborhood similar to those, who did not move. Yet, they perceive stronger complementarities of the parenting style dimensions (t-test of equality: $p=0.013$) and more pronounced substitutability of the control dimension of parenting styles and the neighborhood quality (t-test of equality: $p=0.075$). When restricting the sample to those respondents who answer scenarios with hypothetical children sharing their own children's characteristics, the estimates remain robust, although they lose some precision due to smaller samples.
+
+\subsection{Relationship of returns in the earnings and life satisfaction domain}\label{sec:relationship_w_ls}
+Eliciting perceived returns in the monetary domain is appealing for their ease of interpretation. Yet, one potential concern with them is that parents may not perceive expected earnings at age 30 as the relevant outcome to evaluate the consequences of different parenting styles. Parents may perceive non-monetary outcomes such as children's well-being or life satisfaction as more important. As a second robustness check, I therefore study a second outcome measure, expected life satisfaction of children at age 30. This allows me to test whether the results from the monetary domain carry over to other domains. 
+
+\begin{figure}[h!]\centering 
+    \caption{Relationship of perceived returns in earnings and life satisfaction domain}\label{fig:relationship_w_ls}
+    \vspace{-.1cm}
+    \subfloat[Warmth\label{fig:corr_returns_ind_warmth}]{\includegraphics[width=.33\textwidth]{../../out/figures/corr_returns_ind_warmth.png}}
+    \subfloat[Control\label{fig:corr_returns_ind_control}]{\includegraphics[width=.33\textwidth]{../../out/figures/corr_returns_ind_control.png}}
+    \subfloat[Neighborhood\label{fig:corr_returns_ind_neighborhood}]{\includegraphics[width=.33\textwidth]{../../out/figures/corr_returns_ind_neighborhood.png}}
+    \caption*{\footnotesize \textbf{Notes:} These figures present the relationship of individual-level perceived returns measured in the earnings (x-axis) and life satisfaction domain (y-axis). Individual-level perceived returns ($R_{k,i}^d$ with $k\in\{$warmth, control, neighborhood$\}$ and $d\in\{E,LS\}$) are estimated based on equation~\eqref{eq:main}. All perceived returns are winsorized at the 1\% and 99\% level. The corresponding estimates are presented in Table~\ref{tab:relationship_w_ls}.}
+  \end{figure}
+
+Figure~\ref{fig:relationship_w_ls} presents the relationship of individual-level perceived returns in the earnings and life satisfaction domain. I observe strong and positive associations of perceived returns across different domains with regression coefficients ranging from 0.38 to 0.65. These relationships are essentially identical when controlling for sociodemographic characteristics (Appendix Table~\ref{tab:relationship_w_ls}).\footnote{Appendix Figure~\ref{fig:correlation_w_ls} presents the distribution of individual-level correlations across the two domains. Specifically, I calculate for each individual the (rank) correlation of their expectations in the earnings and life satisfaction domain across the eight scenarios. Both for correlations in levels and in ranks, the mean correlation is approx. 0.63-0.64 (median: 0.84-0.85).} Furthermore, Appendix Table~\ref{tab:scenarios_ls} replicates Table~\ref{tab:mainresults} by using expected life satisfaction instead of expected earnings as an outcome. The results are both qualitatively and quantitatively similar. These patterns suggest that responses in terms of expected earnings are sensible outcomes, capturing returns that not only apply to a monetary domain, but more generally. 
+
+\subsection{Accuracy of beliefs and perceived returns}\label{sec:accuracy}
+How accurate are the beliefs parents report in the scenarios? As reported in Table~\ref{tab:mainresults}, the average expected earnings across all eight scenarios is USD 47,810, which is similar to the mean annual earnings in the CPS (approx. USD 46,200 for individuals aged 30 and working). Moreover, similar to findings from the psychology literature \citep[e.g.,][]{ChanKoo2011,Dornbuschetal1987,Lambornetal1991}, parents associate neglecting parenting (low warmth and control) with low outcomes, and authoritative parenting (high warmth and control) with high future outcomes.
+
+In order to compare the perceived returns to actual returns, I conduct two comparisons. First, I compare perceived returns from my sample to average marginal effects of intensive parenting styles from \citet{Deckersetal2017Balu}. They set up a structural skill development model similar to \citet{Cunhaetal2010} to estimate how children's preferences develop as a function of mothers' preferences and parenting styles. While the authors do not differentiate the warmth and control dimensions of parenting styles, they construct a single latent factor based on similar survey items. Estimating their structural model from observational data, \citeauthor{Deckersetal2017Balu} find marginal effects of intensive parenting styles ranging from 0.313 to 0.424, which are somewhat higher than the combined effects of warmth and control reported in Table~\ref{tab:mainresults}.\footnote{Note that the outcomes I am interested in here are long-term outcomes at age 30. In contrast, \citet{Deckersetal2017Balu} are interested in the development of skills during childhood, i.e., in the short run. Since these skills translate only imperfectly into earnings, these higher returns are consistent with the perceived returns reported here.} 
+
+Second, I exploit the fact that respondents were asked to state their beliefs for children of \textit{average} American families. I draw on data from the National Longitudinal Survey of Youth 1997 (NLSY97), in which children aged 12-17 in 1997 evaluate both their mothers' and their fathers' parenting style. In Appendix Table~\ref{tab:nlsy_actualreturns}, I regress the log earnings of respondents in 2013, when they were on average 30 years old, on indicators for warmth and control, as well as their interaction. The estimates reveal returns similar to the average perceived returns in my sample: The return to mother's warmth and control is 0.104 and 0.020, respectively, while the coefficient on the interaction is 0.026, indicating returns both quantitatively and qualitatively consistent with those in Table~\ref{tab:mainresults}. Using their fathers' parenting styles yields similar results. Note that these estimates are correlations and should not be interpreted as causal. Yet, respondents in my survey were asked to state their beliefs over the outcomes of children of \textit{average} American families. Hence, looking at these basic regressions is informative, despite not accounting for measurement error, the endogeneity of parenting styles, and other confounding factors. In addition to monetary returns, Appendix Table~\ref{tab:nlsy_actualreturns} also presents results from the NLSY on children's high school GPA with similar patterns: The warmth dimension of parenting has large positive returns, while control has smaller, albeit positive returns. Taken together, the perceived returns in my dataset seem to be consistent with actual returns from other settings.
+
+
+\section{Heterogeneity in individual-level returns}\label{sec:determinants}
+The previous section documented perceived returns to different parenting styles and neighborhoods. Yet, these returns depict only average patterns. In the following, I want to characterize the heterogeneity in perceived returns in more detail. In a first step, I study how parental beliefs vary with socioeconomic characteristics. Column (1) of Table~\ref{tab:determinants} reveal patterns consistent with findings from the literature on subjective wage expectations \citep[e.g.,][]{Kaufmann2014}: Females expect lower earnings, while college educated individuals as well as those with higher household incomes report higher earnings expectations.
+
+\begin{table}[h!]\centering
+    \caption{Determinants of individual-level perceived returns}\label{tab:determinants}
+    \resizebox{0.75\textwidth}{!}{
+        \input{../../out/tables/returns_w_production.tex} 
+    }
+    \vspace{0.5em}
+    \caption*{\footnotesize \textbf{Notes:} This table presents regressions of parental beliefs about children's expected log-earnings in column (1) or individual-level perceived returns to warmth ($R_{\text{warmth},i}$; columns 1 and 4), control ($R_{\text{control},i}$; columns 2 and 5), as well as neighborhood ($R_{\text{neighb.},i}$; columns 3 and 6) on sociodemographic characteristics according to equation~\eqref{eq:determinants}. Individual-level perceived returns are estimated based on equation~\eqref{eq:main} for each individual separately. Clustered standard errors by respondent in column (1) and robust standard errors in columns (2)-(4) in parentheses. *, **, and *** denote significance at the 10, 5, and 1 percent level.}
+\end{table}
+
+In a second step, I characterize the heterogeneity in perceived returns for each of the three dimensions.
+Figure~\ref{fig:cdf_returns} presents the distributions of individual-level returns to the three dimensions warmth, control, and neighborhood. There is large heterogeneity in perceived returns. The majority of respondents expect positive returns to all three dimensions, with less than 20\% of the sample expecting negative returns to warmth and neighborhoods. This number amounts to approximately 40\% for control. Additionally, there is a sizable fraction of parents who do not expect parenting styles or neighborhoods to matter, with shares of 14\% for neighborhoods to 32\% in the control dimension.\footnote{I analyze the data quality---specifically regarding the sizable share of zero perceived returns---in Appendix~\ref{app:zeroreturns}.} Moreover, I find that the correlations of returns across the three dimensions are positive, though not perfect (ranging from 0.254 to 0.290), indicating that the different dimensions are related, but capture distinct concepts. Taken together, most parents expect that parenting can pay off for children's long-term outcomes.
+
+\begin{figure}[h!]\centering
+    \caption{Distribution of individual-level perceived returns}\label{fig:cdf_returns}
+    \includegraphics[width=0.6\textwidth]{../../out/figures/cdf_returns_w_2.pdf} 
+    \caption*{\footnotesize \textbf{Notes:} This figure presents the distributions of individual-level perceived returns based on equation~\eqref{eq:main} for the dimensions warmth ($R_{\text{warmth},i}$; dotted), control ($R_{\text{control},i}$; dashed), and neighborhood ($R_{\text{neighb.},i}$; solid). Perceived returns are winsorized at the 1\% and 99\% level.}
+\end{figure}
+
+To what extent is the heterogeneity in the distribution of perceived returns systematic? One point of departure is to investigate potential differences in the perceived returns by parental gender. In particular, there is evidence that mothers spend about twice as much time on child-rearing activities as fathers \citep{Guryanetal2008} and mothers are more likely to adopt parenting styles featuring high levels of warmth and control (see also Appendix Table~\ref{tab:nlsy_ps_genderdiff} for evidence from the National Longitudinal Survey of Youth 1997). Figures~\ref{fig:cdf_returns_warmth_gender}-\ref{fig:cdf_returns_neighborhood_gender} reveal significant differences in parental perceptions of mothers (red, solid lines) and fathers (blue, dashed lines): Mothers expect larger returns than fathers in the warmth (t-test of equality of means: $p<0.001$; Kolmogorov-Smirnov tests of equality of distributions: $p<0.001$) and neighborhood dimensions (t-tests: $p<0.001$, KS-test: $p=0.004$), while there are no significant differences in the control dimension (t-test: $p=0.291$, KS-test: $p=0.150$). Moreover, mothers' higher perceived returns seem to be relatively uniform across the distribution.\footnote{Note that the scenarios refer to both parents adopting a certain parenting style. The present data does not allow me to conclude whether, e.g., respondents perceive certain parenting styles to be more effective for mothers than for fathers. Rather, the patterns in Figure~\ref{fig:cdf_returns_gender} show that females expect higher returns to the warmth dimension of parenting, no matter which parent adopts the particular parenting style.}
+
+\begin{figure}[h!]\centering 
+  \caption{Distribution of individual-level perceived returns by parental gender}\label{fig:cdf_returns_gender}
+  \vspace{-.1cm}
+  \subfloat[Warmth ($R_{\text{warmth},i}$)\label{fig:cdf_returns_warmth_gender}]{\includegraphics[width=.45\textwidth]{../../out/figures/cdf_returns_w_warmth_2_gender.pdf}}
+  \subfloat[Control ($R_{\text{control},i}$)\label{fig:cdf_returns_control_gender}]{\includegraphics[width=.45\textwidth]{../../out/figures/cdf_returns_w_control_2_gender.pdf}}\\
+  \subfloat[Neighborhood ($R_{\text{neighb.},i}$)\label{fig:cdf_returns_neighborhood_gender}]{\includegraphics[width=.45\textwidth]{../../out/figures/cdf_returns_w_neighborhood_2_gender.pdf}} \\
+  \caption*{\footnotesize \textbf{Notes:} These figures present the distributions of individual-level perceived returns based on equation~\eqref{eq:main} for the dimensions warmth ($R_{\text{warmth},i}$; Figure~\ref{fig:cdf_returns_warmth_gender}), control ($R_{\text{control},i}$; Figure~\ref{fig:cdf_returns_control_gender}) and neighborhood ($R_{\text{neighb.},i}$; Figure~\ref{fig:cdf_returns_neighborhood_gender}) for mothers (solid, red) and fathers (dashed, blue) separately. Perceived returns are winsorized at the 1\% and 99\% level.}
+\end{figure}
+
+In the following, I check whether perceived returns are related to other parental characteristics besides gender. More specifically, columns (2)-(4) of Table~\ref{tab:determinants} investigate how perceived returns vary with parents' observable characteristics based on equation~\eqref{eq:determinants}. Interestingly, apart from gender differences in the warmth (+6.2pp.) and neighborhood dimensions (+6.3pp.) as shown in Figure~\ref{fig:cdf_returns_gender}, almost no other characteristics seem to be systematically associated with perceived returns. In particular, I cannot reject the hypothesis that all other sociodemographic coefficients jointly equal zero in each of the three specifications regarding warmth (F-test: $p$ = 0.108), control (F-test: $p$ = 0.935), and neighborhoods (F-test: $p$ = 0.300) in columns (1)-(3), respectively.
+
+The absence of a relationship is surprising, given that \citet{BonevaRauh2018} find systematic associations for some characteristics, but it is in line with other studies \citep[e.g.,][]{Attanasioetal2018}, which do not find associations either.\footnote{One explanation for these differences could be that \citet{BonevaRauh2018} and \citet{Attanasioetal2018} study families in the United Kingdom, with only the latter study employing a representative sample of parents similar to the present paper.} Thus, there are sizable differences in both the level beliefs (as shown in column (1) of Table~\ref{tab:determinants}) as well as perceived returns by parental gender, but no differences in perceived returns along variables capturing differences in socioeconomic status. Moreover, as I will show in Section~\ref{sec:predictivepower}, these perceived returns are highly predictive for actual parenting styles. The absence of associations between sociodemographics and perceived returns therefore indicates that they capture an important aspect of parental decision-making that is distinct from standard individual characteristics and constraints. Moreover, it is notable that parents with higher socioeconomic status do not hold differential beliefs about the returns to good neighborhoods.
+
+In addition to demographic characteristics, the survey also elicited respondents' parenting values. These variables measure parents' altruism and paternalism towards their own children, as well as their belief in the malleability of skills. Table~\ref{tab:determinants_parentingvalues} reveals some interesting patterns: All three perceived return measures are significantly related to parents' beliefs about the malleability of skills, similar to \citet{BonevaRauh2018,Attanasioetal2018}. In particular, those parents who believe that skills are malleable perceive returns to be higher. In other words, those parents who do not share this belief react less to differences across scenarios. Moreover, returns in the warmth and neighborhood dimensions relate to the parents' altruism towards their children, whereas returns in the control dimension are associated with parental paternalism. This is consistent with theoretical results by \citet{DoepkeZilibotti2017}, who show that sufficiently paternalistic parents adopt parenting styles with more control, i.e., authoritarian or authoritative parenting styles in which parents exert effort to mold their children's preferences. 
+Parents' altruism and paternalism are two key parameters in their model that lead to different parenting styles.
+
+\begin{table}[h!]\centering
+    \caption{Determinants of individual-level perceived returns II}\label{tab:determinants_parentingvalues}
+    \resizebox{0.7\textwidth}{!}{
+        \input{../../out/tables/returns_w_parvalues.tex} 
+    }
+    \vspace{0.5em}
+    \caption*{\footnotesize \textbf{Notes:} This table presents regressions of individual-level perceived returns to warmth ($R_{\text{warmth},i}$; columns 1 and 4), control ($R_{\text{control},i}$; columns 2 and 5) as well as neighborhood ($R_{\text{neighb.},i}$; columns 3 and 6) on parenting values and controls for respondent's age and gender, as well as indicators for being white, having a college degree, being employed, and being a single parent, log-household income, number of children in the household, and the share of children being female according to equation~\eqref{eq:determinants} and as shown in Table~\ref{tab:determinants}. Individual-level perceived returns are estimated based on equation~\eqref{eq:main} for each individual separately. Robust standard errors in parentheses. *, **, and *** denote significance at the 10, 5, and 1 percent level.}
+\end{table}
+
+To test for the robustness of these results, I conduct two robustness checks. First, as shown in Figure~\ref{fig:cdf_returns}, a sizable fraction of respondents expect zero returns in some dimensions and expecting zero returns is correlated across dimensions (see also the discussion in Appendix~\ref{app:zeroreturns}). In Appendix Table~\ref{tab:zeroreturns}, I therefore exclude these respondents. The results are qualitatively as well as quantitatively similar. 
+Second, I adopt an IV strategy similar to equation~\eqref{eq:predictivepower}, which levers perceived returns in both the earnings as well as the life satisfaction domain, and tries to predict sociodemographic characteristics. If the lack of significant determinants in Table~\ref{tab:determinants} were just due to a high degree of measurement error and thus lower efficiency, using the returns as explanatory variables and applying a measurement correction should partly correct for measurement error. Yet, results in Appendix Table~\ref{tab:determinants_oriv} confirm the previous patterns: Females expect larger returns to warmth as well as neighborhoods, and parenting values show the same associations as reported above, but other characteristics do not seem to be strongly related to perceived returns.
+
+\section{Relevance of perceived returns for actual behavior}\label{sec:predictivepower}
+In this section, I study to what extent perceived returns map into actual parental decision-making by analyzing the association of perceived returns with parents' actual behavior. Hence, I focus on the predictive power of returns for actual parenting styles and neighborhood choices. If perceived returns translated into actual parental decision-making, their relevance would be even higher in light of the lacking relationship to sociodemographic characteristics documented in the previous section.
+
+Panel A and B of Table~\ref{tab:predictivepower_ps} examine the relevance of perceived returns for actual parenting styles. Specifically, I relate (standardized) perceived returns in each of the two domains to the warmth and control dimension of parenting styles, and adopt the IV strategy outlined in equation~\eqref{eq:predictivepower} of Section~\ref{sec:empiricalstrategy}.\footnote{Note that I focus on each of the two dimensions in isolation. I thus abstract from a parental decision-making process in which they choose the levels of warmth and control simultaneously. In principle, one could think of a structural model carefully mapping parental beliefs into their decisions. Such a structural model is beyond the scope of the present paper, but constitutes an interesting avenue for future research.} The estimates in Panel A reveal that returns in both the earnings as well as the life satisfaction domain relate significantly to parenting behavior. An increase of one standard deviation in perceived returns is associated with a 0.043-0.044 standard deviation increase in the warmth dimension of parenting styles. To account for measurement error in perceived returns, I instrument perceived returns in the earnings (life satisfaction) domain with perceived returns in the life satisfaction (earnings) domain according to equation~\ref{eq:predictivepower}. This allows me to recover a more general notion of perceived returns that is not restricted to a particular domain. Doing so, I find even larger associations of 0.084-0.088 standard deviations for an increase of one standard deviation in perceived returns that even hold when simultaneously controlling for perceived returns in the control dimension. 
+
+\begin{table}[h!]
+    \caption{Relevance of perceived returns for actual parenting styles and neighborhoods}\label{tab:predictivepower_ps}\centering
+    \resizebox{0.775\textwidth}{!}{
+        \input{../../out/tables/predictive_power_returns2.tex}
+    }
+    \vspace{0.5em}
+    \caption*{\footnotesize \textbf{Notes:} Panel A and B examine the relevance of perceived returns for actual parenting styles. Columns (1) and (2) relate standardized measures of warmth and control to the corresponding perceived returns in the earnings and life satisfaction domain. In columns (3) and (4), I adopt the IV approach of equation~\eqref{eq:predictivepower} to correct for measurement error. Columns (1)-(3) of Panel C present the results of the relevance of perceived returns to neighborhoods for subjective neighborhood quality, a factor constructed from agreement to the three statements (i) ``My neighborhood is a good place to raise children'', (ii) ``I feel safe in my neighborhood'', and (iii) ``My child attends a school of good quality''. Columns (4) and (5) of Panel C present corresponding results for objective measures of a neighborhood's characteristics based on respondents' postcodes and merged to data from \citet{ChettyHendren2018Exposure,ChettyHendren2018County}. Economic conditions refers to a factor capturing local economic conditions in an area, while segregation relates to measures of local segregation and urbanization. For details on these factors capturing neighborhood quality, see Appendix~\ref{app:predictivepower}. All specifications include controls for respondent's age and gender, as well as indicators for being white, having a college degree, being employed, and being a single parent, log-household income, number of children in the household, and the share of children being female as in Table~\ref{tab:mainresults}. Bootstrapped standard errors from 1,000 repetitions in parentheses. *, **, and *** denote significance at the 10\%, 5\%, and 1\% level.}
+\end{table}
+
+A similar picture arises when analyzing the role of perceived returns to control for the control dimension of parenting styles in Panel B. While the perceived returns in the monetary domain are positive but insignificant ($p=0.161$), perceived returns measured in the life satisfaction domain and specifications accounting for measurement error reveal significant associations even if simultaneously controlling for return to warmth. These associations show that perceived returns are relevant and predictive for actual parenting styles. Parents who perceive larger benefits to a certain form of parenting are more likely to adopt the corresponding parenting styles. This supports the conjecture that such parental beliefs are a fundamental part of parental decision-making processes. 
+
+In Panel C of Table~\ref{tab:predictivepower_ps}, I present results linking perceived returns to neighborhoods to the quality of the neighborhood in which a family is living. Specifically, I use two approaches to examine this relationship, one based on a subjective assessment of the respondent's neighborhood, one based on objective county-level neighborhood characteristics from \citet{ChettyHendren2018Exposure,ChettyHendren2018County} as described in Section~\ref{sec:empiricalstrategy}. 
+
+I find that perceived returns to neighborhoods do not consistently correlate with subjective measures of neighborhood quality. While perceived returns in the monetary domain are significantly associated with the subjectively assessed quality of a neighborhood, neither using returns measured in the life satisfaction domain nor the IV strategy correcting for measurement error reveal significant correlations with subjective neighborhood assessments. Turning to objective measures, I observe that those perceived returns are also not related to better economic conditions (see column (4); $p=0.169$). Yet, they correlate negatively with its segregation (column (5)).
+
+\subsection{The role of constraints for the relevance of perceived returns} 
+The previous results abstracted from potential constraints families may face. Yet, financial or personal constraints may hinder parents to adopt certain parenting styles or move where they would like to raise their children. If this were the case, the previous associations would be attenuated, as, e.g., parents may expect large returns to living in a good neighborhood, but lack the resources to live in or move to these neighborhoods. In order to study the role of these constraints, I study the heterogeneity in the relation of perceived returns to actual parenting styles and neighborhood quality with respect to two proxies for the constraints: single-parent status as a measure of time and personal constraints in raising children, as well as household income as a measure of financial constraints.
+
+\begin{figure}[h!]\centering
+    \caption{Heterogeneity of perceived returns' relevance by resource constraints}\label{fig:oriv_hetero}
+    \subfloat[Parenting styles\label{fig:oriv_ps_hetero}]{\includegraphics[width=0.725\textwidth]{../../out/figures/predictive_power_ps_hetero.pdf}} \\
+    \subfloat[Neighborhood quality\label{fig:oriv_nb_hetero}]{\includegraphics[width=0.95\textwidth]{../../out/figures/predictive_power_nb_hetero.pdf}}
+    \caption*{\footnotesize \textbf{Notes:} This figure presents heterogeneity analysis of the predictive power of perceived returns for parenting styles (Figure~\ref{fig:oriv_ps_hetero}) and neighborhood quality (Figure~\ref{fig:oriv_nb_hetero}) based on column (4) in Panels A and B of Table~\ref{tab:predictivepower_ps} as well as columns (3) to (5) of Panel C. Splits are based on two proxies for mental and financial constraints: household income and single-parent status. All estimates are based on the IV approach of equation~\eqref{eq:predictivepower} to correct for measurement error and all specifications include controls for respondent's age and gender, as well as indicators for being white, having a college degree, being employed, and being a single parent, log-household income, number of children in the household, and the share of children being female as in Table~\ref{tab:mainresults}. Shaded areas indicate bootstrapped 90\%, 95\%, and 99\% confidence intervals from 1,000 repetitions.}
+\end{figure}
+
+Figure~\ref{fig:oriv_hetero} shows how the associations of perceived returns from Table~\ref{tab:predictivepower_ps} vary with financial and personal resources. Considering the role of resource constraints for parenting styles, I find that financial constraints do not seem to moderate how perceived returns to parenting relate to actual parenting. By contrast, Figure~\ref{fig:oriv_ps_hetero} shows that the association of perceived returns and parenting styles is not significantly different from zero with large confidence intervals for single-parent households, while it is significantly positive and more pronounced for less constrained two-parent households. Turning to the perceived returns to neighborhoods in Figure~\ref{fig:oriv_nb_hetero}, I find a more pronounced picture for financial constraints: The estimated relationship of perceived returns to neighborhoods with subjective and objective measures is pronounced for less constrained individuals with above-median household income, while close to zero for those who are more likely to have limited financial resources.
+
+Taken together, these patterns suggest two conclusions. First, if households do not face any constraints, parents' perceived returns are relevant and predictive for actual parenting styles, subjective assessments of their neighborhood, and objective measures of neighborhood quality. This indicates that parental beliefs are important to understand parental decision-making, despite beliefs being unlikely to explain socioeconomic differences in parenting and neighborhood choice (as shown by the absence of a socioeconomic gradient in Table~\ref{tab:determinants}). Second, personal (time) constraints seem to limit parents ability to engage in parenting styles they perceive to be successful, while the heterogeneity in terms of household income is consistent with financial constraints hindering families to move to better neighborhoods. This is consistent with \citet{Bergmannetal2020CMTO} who observe that informational interventions about high-opportunity areas have only small impacts on subsequent neighborhood quality. Thus, simply informing parents of what constitutes a good neighborhood might not be a fruitful policy to nudge families into moving. Rather, previous research has shown that bundled and more intensive interventions---e.g., combining moving vouchers with customized search assistance and landlord engagement---have larger effects than separate treatments focusing on one of these components only \citep{DeLucaRosenblatt2017,Schwarzetal2017,Bergmannetal2020CMTO}, as the former reduce barriers that that hinder households to move.
+
+\section{Conclusion}\label{sec:conclusion}
+While parents are crucial for the development of children, parenting itself remains a ``mystifying subject'' \citep{Bornstein2002}. To improve our understanding how and where parents decide to raise their children, I focus on parents' beliefs constituting an inherent part of their decision-making process. I conduct a survey that is among the first to investigate parental beliefs of a representative sample of parents. In the main part of the survey, I elicit beliefs using a hypothetical scenario approach that varies two factors with importance for the development of children and, hence, their long-term outcomes: first, the parenting style defined by the levels of warmth and control parents employ in raising their children, and, second, the quality of the neighborhood in which a family lives. This allows me to infer parents' perceived returns to these different dimensions and sheds light on their perceived substitutability or complementarity. 
+
+My analysis shows that parents expect large returns to the warmth dimension of parenting styles and to living in good neighborhoods. Parenting styles with high levels of control are only associated with positive returns if they are paired with warmth suggesting that these two dimensions are perceived as complements. Moreover, I show that parents expect parenting and neighborhoods to interact. They believe that parenting can partly compensate for living in deprived neighborhoods.
+
+When studying the heterogeneity in perceived returns, my estimates reveal profound gender differences: mothers expect significantly larger returns than fathers do in the warmth and neighborhood dimension, while parental perceptions are similar for the control dimension. Perhaps surprisingly, other sociodemographic characteristics do not correlate with these perceived returns and thus cannot be used as proxies. Importantly, the perceived returns I recover are relevant for actual parenting behavior and neighborhood choices, but only if parents do not face constraints hindering them to engage in certain forms of parenting or to move to specific neighborhoods. Thus, studying parental beliefs can yield important insights into parental decision-making processes, while abstracting from potential frictions families face.
+
+The absence of a socioeconomic gradient and the role of constraints suggest that perceived returns are an unlikely candidate to explain socioeconomic differences in parenting behavior and families' neighborhood choices, pointing towards the limits of informational interventions aimed at improving parenting behavior and promoting locating about high-opportunity neighborhoods \citep[see also][]{Bergmannetal2020CMTO}. 
+
+Furthermore, the interaction between parenting and neighborhoods could provide an explanation for persistent differences in parenting across sociodemographic groups which might increase as neighborhoods become more homogeneous over time \citep{putnam2016our}. To the extent that some form of ``optimal parenting'' exists, my results therefore suggest that the optimal parenting behavior may be environment-specific. 
+
+The results in this paper open at least two avenues for further research. First, since the returns to parental investments hinge on the parenting style \citep{Cunha2015}, it would be interesting to analyze the relationship between the quality margin of parenting considered in this paper and the quantity margin as in the previous literature \citep{BonevaRauh2018,Bhalotraetal2017,Attanasioetal2018}. Second, as beliefs about returns to parenting depends on the quality of neighborhoods, this calls for a deeper understanding of the human capital formation process and the relationship between parenting and a family's environment more generally \citep[as, e.g., in][]{Agostinellietal2020}. 
+
+
+\clearpage
+\setstretch{1}
+\printbibliography
+\setstretch{1.25}
+\onehalfspacing
+
+\clearpage
+\appendix
+\onehalfspacing
+\vspace{.5cm}
+
+\section*{\centering Appendix---For Online Publication}
+
+\begin{table}[h!]\centering
+\begin{tabular}{cl}
+\toprule
+\ref{app:scenario_text} & Wording of hypothetical scenarios \\
+\ref{app:theoreticalframework} & Theoretical framework \\
+\ref{app:ls_estimates} & Relationship of perceived returns across domains \\
+\ref{app:zeroreturns} & Data quality and zero perceived returns \\
+\ref{app:determinants} & Additional results on determinants of perceived returns \\
+\ref{app:efa} & Exploratory factor analysis for parenting styles \\
+\ref{app:predictivepower} & Relevance of perceived returns for neighborhood characteristics \\
+\ref{app:nlsy} & Parenting styles in the NLSY97 \\
+\bottomrule
+\end{tabular}
+\end{table}
+\clearpage
+\setcounter{table}{0}
+\setcounter{figure}{0}
+\setcounter{footnote}{0}
+
+\renewcommand{\thesection}{\Alph{section}}
+\renewcommand{\thetable}{\Alph{section}.\arabic{table}}
+\renewcommand{\thefigure}{\Alph{section}.\arabic{figure}}
+
+\section{Wording of hypothetical scenarios}\label{app:scenario_text}
+In the following, I present the wording of the main survey instrument containing the hypothetical scenarios. Both the age (6-16 years) as well as the gender of the child in question (male/female) are randomized, resulting in male names (John and Simon) or female names (Sarah and Emily) for the children in the scenarios. \\
+
+\textit{We are interested in your opinion about how important different parenting styles are for the future of children.}
+
+\textit{For this purpose, we would like to ask you to imagine two average American families, the Joneses and the Smiths, who make decisions how to raise their children. More specifically, we will show you different scenarios, and ask what you think the likely yearly earnings and life satisfaction of their children at age 30 will be. There are no clear right or wrong answers, and we know these questions are difficult. Please try to consider each scenario carefully and tell us what you believe the likely outcome will be.}\\
+
+\textit{Mr and Mrs Jones have one son (daughter), John (Sarah). John (Sarah) is 6 (7-16) years old. The Joneses live in a good neighborhood with little crime (10 violent crimes per 10,000 inhabitants) and low unemployment (2\%). Now let's think about the future of John (Sarah). Assuming John (Sarah) is working full-time, what do you expect his (her) gross yearly earnings (in today's USD) to be when he (she) is 30 years old in each of the following scenarios? What do you expect his (her) life satisfaction to be at age 30 on a scale from 1 (low) to 100 (high)?}\\
+
+\textit{\textbf{Scenario 1:} John (Sarah)'s parents show him (her) once per week that they like him (her). At the same time, they tell him (her) every other day that he (she) has to obey their decisions.}
+
+\textit{\textbf{Scenario 2:} John (Sarah)'s parents show him (her) once per week that they like him (her). At the same time, they tell him (her) once per week that he (she) has to obey their decisions.}
+
+\textit{\textbf{Scenario 3:} John (Sarah)'s parents show him (her) every other day that they like him (her). At the same time, they tell him (her) every other day that he (she) has to obey their decisions.}
+
+\textit{\textbf{Scenario 4:} John (Sarah)'s parents show him (her) every other day that they like him (her). At the same time, they tell him (her) once per week that he (she) has to obey their decisions.}\\
+
+\textit{Now imagine a different family, the Smiths. In many respects, the Smiths are very similar to the Joneses. For example, Mr and Mrs Smith have one son (daughter), Simon (Emily), who is also 6 (7-16) years old and as smart as John (Sarah). Mr and Mrs Smith also have similar levels of income and education as Mr and Mrs Jones and spend as much time and money on raising their child. However, there is one difference. Unlike the Joneses, the Smiths live in a bad neighborhood with much crime (60 violent crimes per 10,000 inhabitants per year) and high unemployment (10\%). Assuming Simon (Emily) is working full-time, what do you expect his (her) gross yearly earnings (in today's USD) to be when he (she) is 30 years old in each of the following scenarios? What do you expect his (her) life satisfaction to be at age 30 on a scale from 1 (low) to 100 (high)?}\\
+
+\textit{\textbf{Scenario 5:} Simon (Emily)'s parents show him (her) once per week that they like him (her). At the same time, they tell him (her) every other day that he (she) has to obey their decisions.}
+
+\textit{\textbf{Scenario 6:} Simon (Emily)'s parents show him (her) once per week that they like him (her). At the same time, they tell him (her) once per week that he (she) has to obey their decisions.}
+
+\textit{\textbf{Scenario 7:} Simon (Emily)'s parents show him (her) every other day that they like him (her). At the same time, they tell him (her) every other day that he (she) has to obey their decisions.}
+
+\textit{\textbf{Scenario 8:} Simon (Emily)'s parents show him (her) every other day that they like him (her). At the same time, they tell him (her) once per week that he (she) has to obey their decisions.}
+
+
+\clearpage
+\section{Theoretical framework}\label{app:theoreticalframework}
+\setcounter{table}{0}
+\setcounter{figure}{0}
+\setcounter{footnote}{0}
+
+There is accumulating evidence that both the way in which parents raise their children \citep[e.g.,][]{Deckersetal2017Balu,Cobb-Clark2018} as well as neighborhoods in which children are growing up \citep[e.g.,][]{ChettyHendren2018County,ChettyHendren2018Exposure} have long-lasting effects on the development of children and their life outcomes. In this paper, I study parents' perceptions about the returns to these factors, which may or may not coincide with their actual returns. Yet, they are important as parents base their actual decisions on their beliefs and perceived returns.
+
+As a point of departure, I consider a simple stylized model, in which parental investments as well as the environments/neighborhood impact the skill formation of children and thus their long-term outcomes such as earnings and well-being. Let $\theta_{t+1}$ denote children's skills in period $t+1$ (adulthood), $I_t$ denote parents' time investments, and $E_t$ captures the quality of the environment in which a family is living (e.g., neighborhood quality) during childhood. Investments and the environment form children's skills according to the following function:
+\begin{align}
+\theta_{t+1} = f(I_t, E_t; \psi), \label{eq:skillformation}
+\end{align}
+in which $\psi$ denotes a vector of parameters which describe the productivity of investments and the environment in the skill formation process, which I conceptualize as the parenting styles that parents adopt in raising their children.\footnote{Thus, this assumption differs from, e.g., \citet{Deckersetal2017Balu} who model parenting styles as an additional investment of parents besides time investments, and is more closely aligned to the idea of the quality of parenting for a given amount of time investments. Nonetheless, depending on the functional form, the model presented here nests skill formation functions that conceptualize parenting styles as an additional input in the skill production function rather than a parameter. See also \citet{Cunha2015} for a similar conceptualization of parenting styles as parameters of the skill production function. Moreover, the skill formation function in equation~\eqref{eq:skillformation} can easily extended to allow for more than one period in childhood to accommodate sensitive periods during childhood in which investments are more productive than in others \citep{CunhaHeckman2007} by indexing $\psi$ with $t$.} I assume that the skill formation process $f(\cdot)$ is continuous, monotonically increasing, and concave in its arguments.
+
+Furthermore, I assume that there exist a monotonically increasing function $g(\cdot)$ mapping skills in adulthood, $\theta_{t+1}$, into economic outcomes, $y_{t+1}$, such as earnings or life satisfaction. Taken together, this yields a function $h=g \circ f$ describing how inputs---time investments, environments and parenting styles---translate into economic outcomes---earnings and life satisfaction. Parents base their decisions which parenting style to adopt and in which neighborhood to live not on the actual consequences, which are rather difficult to anticipate, but rather on their perceptions of the technology of skill formation. In particular, parents choose their investments, parenting styles, and neighborhoods based on expected outcomes $y_{t+1}=h_i(I_t,E_t,\psi)$
+
+The scenarios described in Section~\ref{sec:surveydescription_data} therefore vary the quality of the neighborhood in which a hypothetical family lives, as well as the parenting style, and hold their time investments constant. Thus, by comparing parental beliefs across scenarios, I can recover their perceptions about the marginal product of improving the neighborhood environment of children
+\begin{align}
+   \frac{\partial h_i(\cdot)}{\partial E_t}
+\end{align}
+holding parental investments and the parenting style constant, and the marginal product of different dimensions of parenting styles
+\begin{align}
+   \frac{\partial h_i(\cdot)}{\partial \psi^k}
+\end{align}
+for $k\in\{w,c\}$, where $w$ corresponds to the warmth dimension of parenting styles, whereas $c$ corresponds to the control dimension.
+
+Moreover, by comparing cross-derivatives of changes in the neighborhood quality as well as changes in parenting styles, I am able to study whether parents perceive neighborhoods and the two dimensions of parenting styles, warmth and control, as substitutes (i.e., negative cross-derivatives), complements (i.e., positive cross-derivatives), or independent of each other (i.e., zero cross-derivatives):
+\begin{align}
+    \frac{\partial^2 h_i(\cdot)}{\partial E_t \partial\psi^w}
+    \lesseqgtr 0, \quad
+    \frac{\partial^2 h_i(\cdot)}{\partial E_t \partial\psi^c}
+    \lesseqgtr 0, \quad
+    \frac{\partial^2 h_i(\cdot)}{\partial \psi^w \partial \psi^c}
+    \lesseqgtr 0.
+\end{align}
+
+If, for example, parents perceive that parenting can partly compensate for the lack of a good environment, the first two terms would be negative. Similarly, if parents perceive that parenting styles pairing high levels of warmth with high levels of control as in authoritative parenting styles has additional benefits, the last term would be positive.
+
+For each of the scenarios in the survey, I vary one of the factors (warmth or control dimension of parenting styles, neighborhood quality) and elicit two outcomes that allow me to determine the sign and magnitude of these partial derivatives in two domains: children's earnings and their life satisfaction (on a scale from 1 to 100) at age 30. Eliciting both of these long-term outcomes has several advantages: First, these outcomes allow me to easily elicit parents' beliefs about the consequences of growing up in a good neighborhood and being raised with a particular parenting style while holding other parental investments fixed. Second, they allow me to calculate parents' perceived returns to these factors in a straightforward manner. In fact, the scenarios are constructed to allow for comparisons that change only one dimension at a time. Third, I can test whether my results only apply to a specific domain in which these outcomes were elicited, or whether they are similar across different domains. Eliciting parental beliefs based on the hypothetical scenarios thus allows me to shed light on the perceived form of the technology of skill formation.
+
+
+\clearpage
+\section{Relationship of perceived returns across domains}\label{app:ls_estimates}
+\setcounter{table}{0}
+\setcounter{figure}{0}
+\setcounter{footnote}{0}
+
+\begin{figure}[h!]\centering 
+    \caption{Individual-level correlation of earnings and life satisfaction expectations}\label{fig:correlation_w_ls}
+    \vspace{-.1cm}
+    \subfloat[Correlation\label{fig:correlation_level_w_ls}]{\includegraphics[width=.475\textwidth]{../../out/figures/correlation_w_ls.pdf}}
+    \subfloat[Rank correlation\label{fig:correlation_rank_w_ls}]{\includegraphics[width=.475\textwidth]{../../out/figures/correlation_spearman_w_ls.pdf}}\\\vspace{-.3cm}
+    \caption*{\footnotesize \textbf{Notes:} This figure presents the distribution of individual-level correlations (Figure~\ref{fig:correlation_level_w_ls}) and rank correlation (Figure~\ref{fig:correlation_rank_w_ls}) of earnings and life satisfaction expectations. The vertical black line indicates the mean correlation across respondents of 0.63 (Figure~\ref{fig:correlation_level_w_ls}) and 0.64 (Figure~\ref{fig:correlation_rank_w_ls}). Note that rank correlations have the advantage of merely requiring an ordinal rather than a cardinal scaling for life satisfaction.}
+  \end{figure}
+
+\begin{table}[h!]\centering
+    \caption{Relationship of perceived returns in earnings and life satisfaction domain}\label{tab:relationship_w_ls}
+        \small
+        \input{../../out/tables/return_relationships_w_ls_2.tex}
+    \vspace{0.5em}
+    \caption*{\footnotesize \textbf{Notes:} This table presents regressions of individual-level perceived returns in the life satisfaction domain ($R_{k,i}^{LS}$) on perceived returns in the monetary domain ($R_{k,i}$) for $k$ = warmth, control, neighborhood. Returns are calculated from estimating equation~\eqref{eq:main} for each individual using either expected earnings ($R_{k,i}$) or expected life satisfaction ($R_{k,i}^{LS}$) at age 30 as an outcome. Controls include respondent's age and gender, as well as indicators for being white, having a college degree, being employed, and being a single parent, log-household income, number of children in the household, and the share of children being female as in Table~\ref{tab:mainresults}. Robust standard errors in parentheses. *, **, and *** denote significance at the 10, 5, and 1 percent level. Figure~\ref{fig:relationship_w_ls} presents these results visually.}
+\end{table}
+
+\begin{table}[h!]
+    \caption{Parental beliefs about perceived returns in the life satisfaction domain}\label{tab:scenarios_ls}
+    \resizebox{\textwidth}{!}{
+        \input{../../out/tables/scenarios_ls.tex}
+    }
+    \vspace{0.5em}
+    \caption*{\footnotesize \textbf{Notes:} This table presents least squares regressions of log life satisfaction expectations based on equation~\eqref{eq:main}. Columns (1) through (3) focus on first-order effects, while columns (4) to (6) add interactions. Standard errors clustered by respondent in parentheses. *, **, and *** denote significance at the 10, 5, and 1 percent level.}
+\end{table}
+
+\clearpage
+\section{Data quality and zero perceived returns}\label{app:zeroreturns}
+\setcounter{table}{0}
+\setcounter{figure}{0}
+\setcounter{footnote}{0}
+
+Figure~\ref{fig:cdf_returns} shows that there is a sizable share of respondents who report zero returns in at least one the three dimensions. These numbers range from 14\% for neighborhoods to 32\% in the control dimension of parenting styles. These responses can be due to two reasons: First, the data quality is low and respondents enter the same numbers for all belief elicitations. Second, they expect zero returns for a particular dimension. Differentiating between these two explanations is difficult. I can, however, provide some indication that some parents indeed seem to expect zero returns for a particular dimension, suggesting that these zero returns are not entirely due to low data quality.
+
+As a first check, I can look at the correlation in zero perceived returns across the different dimensions warmth, control, and neighborhoods. Table~\ref{tab:zerocorrelations} shows that respondents who perceive no returns in one dimension are also more likely to also report zero returns in another. This holds true for both the earnings as well as the life satisfaction dimension. This pattern is especially pronounced for both parenting dimensions, suggesting that these individuals do not expect parenting to matter for long-term outcomes of children, but is less pronounced when comparing perceived returns to parenting styles with perceived returns to neighborhoods. Thus, if respondents entered the same expectation for every belief, we should observe high correlations among all three dimensions. Instead, these correlations suggest that there are some parents who truly expect zero returns to parenting, but non-zero returns to living in a better neighborhood.
+
+\begin{table}[h!]\centering
+    \caption{Correlations of zero perceived returns}\label{tab:zerocorrelations}
+    
+        \subfloat[Earnings domain\label{tab:zerocorrelations_E}]{\resizebox{0.475\textwidth}{!}{\input{../../out/tables/zeroreturns_w_correlations.tex}}}
+        \subfloat[Life satisfaction domain\label{tab:zerocorrelations_LS}]{\resizebox{0.475\textwidth}{!}{\input{../../out/tables/zeroreturns_ls_correlations.tex}}}
+    \vspace{0.5em}
+    \caption*{\footnotesize \textbf{Notes:} This table presents correlations of indicators for whether a respondent expects zero returns to warmth, control, or neighborhoods, both for the earnings domain (Table~\ref{tab:zerocorrelations_E}) as well as the life satisfaction domain (Table~\ref{tab:zerocorrelations_LS}). *, **, and *** denote significance at the 10, 5, and 1 percent level.}
+\end{table}
+
+Second, I find that of 484 respondents (29.6\% of the sample), who report zero perceived returns to both parenting style dimensions in the earnings domain, 200 report non-zero returns in the life satisfaction domain. This suggest that for a sizable share parenting simply does not matter for children's success (as measured by children's earnings at age 30), but for other dimensions of well-being (e.g., life satisfaction at age 30). Aggregating over all three dimensions (warmth, control, neighborhoods) and both elicitation domains (earnings and life satisfaction), only 4.8\% of all respondents report zero returns for all belief elicitations.
+
+Finally, I check to what extend reporting zero perceived returns to parenting, to neighborhoods, or to both dimensions relates to their sociodemographic characteristics. Panel A of Table~\ref{tab:zeroreturns} shows that fathers, older respondents, as well as those with fewer children and who do not believe that skills are malleable are more likely to report zero responses in the parenting domains. Panel B shows how the results in Table~\ref{tab:determinants} would change once I restrict the sample to respondents perceiving non-zero returns. The patterns are qualitatively and quantitatively similar to the whole sample.
+
+\begin{table}[h!]\centering
+    \caption{Perceived returns accounting for zero responses in the earnings domain}\label{tab:zeroreturns}
+    \resizebox{.95\textwidth}{!}{
+        \input{../../out/tables/zero_returns_w_2.tex} 
+    } 
+    \vspace{0.5em}
+    \caption*{\footnotesize \textbf{Notes:} This table presents regressions of an indicator of zero perceived returns (Panel A) or individual-level perceived returns excluding those with zero returns (Panel B) on sociodemographic characteristics and parenting values according to equation~\ref{eq:determinants}. Individual-level perceived returns are estimated based on equation~\eqref{eq:main} for each individual separately. The dependent variable in column (1) corresponds to an indicator equal to one if returns to both warmth and control are perceived to be zero, while column (2) focuses on zero perceived returns in the neighborhood dimension. Column (3) checks for all three dimensions simultaneously. Columns (4) to (6) correspond to columns (4) to (6) of Table~\ref{tab:determinants}, but exclude individuals that report zero perceived returns according to column (1) and (2), respectively. Robust standard errors in parentheses. *, **, and *** denote significance at the 10, 5, and 1 percent level.}
+\end{table}
+
+
+\clearpage
+\section{Additional results on determinants of perceived returns}\label{app:determinants}
+\setcounter{table}{0}
+\setcounter{figure}{0}
+\setcounter{footnote}{0}
+
+The perceived returns analyzed in Section~\ref{sec:determinants} are subject to measurement error, as they are inferred from eight observations only. While the main analysis uses the perceived returns in outcomes, for which measurement error just reduces the efficiency of the estimates, I can also use the perceived returns as explanatory variables and adopt the measurement error correction as discussed in Section~\ref{sec:empiricalstrategy}. Rather than using measures of parenting styles as outcomes, I aim at predicting individual characteristics using the perceived returns from the earnings and life satisfaction domain. As before, I duplicate all observations and check whether perceived returns can predict a specific characteristic conditional on all other characteristics by estimating
+
+\begin{align}\label{eq:oriv_app}
+&\left(\begin{array}{c}x_{i}\\x_{i}\end{array}\right) = \left(\begin{array}{c}\delta_0^{E}\\ \delta_0^{LS}\end{array}\right) + \delta_1 \left(\begin{array}{c}R_{k,i}^{E}\\R_{k,i}^{LS}\end{array}\right) + \left(\begin{array}{c}\delta_2^{E}\tilde{X}_{i}\\\delta_2^{LS}\tilde{X}_{i}\end{array}\right) + \nu_{k,i} \\
+&\text{instrumenting } \left(\begin{array}{c}R_{k,i}^{E}\\ R_{k,i}^{LS}\end{array}\right) \text{ with } Z=\left(\begin{array}{cc}R_{k,i}^{LS} & 0_{N} \\ 0_{N} & R_{k,i}^{E}\end{array}\right). \nonumber
+\end{align}
+Here, $k$ indicates the dimension under consideration ($k$ = warmth, control, neighborhood), $\tilde{X}_i$ denotes all sociodemographic characteristics excluding the one that is used as an outcome, and standard errors will be bootstrapped.
+Table~\ref{tab:determinants_oriv} presents the results of this exercise. Each cell corresponds to a coefficient from a regression of equation~\eqref{eq:oriv_app}: An increase of one standard deviation in perceived returns in the warmth or neighborhood dimension is associated with a 3.6-4.0 percentage point increase in the probability of being female and parenting values show similar patterns as before.
+
+
+\begin{table}[h!]\centering
+    \caption{Determinants of individual-level perceived returns using instrumented perceived returns}\label{tab:determinants_oriv}
+    \begin{footnotesize}
+        \input{../../out/tables/determinants_oriv.tex} 
+    \end{footnotesize}
+    \vspace{0.5em}
+    \caption*{\footnotesize \textbf{Notes:} This table presents regressions of a respondent's characteristic $x_i$ on the instrumented and standardized perceived return and all other individual characteristics based on equation~\eqref{eq:oriv_app}. Each cell reports the coefficient of the perceived returns from a separate regression with the characteristics on the left as the dependent variable. Column (1) uses perceived returns to warmth, column (2) perceived returns to control, and column (3) perceived returns to neighborhoods as the regressor of interest. All specifications include the non-used variables as additional controls. Bootstrapped standard errors form 1,000 repetitions in parentheses. *, **, and *** denote significance at the 10, 5, and 1 percent level.}
+\end{table}
+
+
+\clearpage
+\section{Exploratory factor analysis for parenting styles}\label{app:efa}
+\setcounter{table}{0}
+\setcounter{figure}{0}
+\setcounter{footnote}{0}
+
+In the survey, I use two established scales by \citet{Perrisetal1980} and \citet{Schwarzetal1997} to measure the warmth and control dimension of parenting styles. These scales are frequently used in the literature \citep[e.g.,][]{Deckersetal2017Balu} and part of large-scale panel studies such as the German Socioeconomic Panel (SOEP). Here, I briefly show that the 3-item warmth scale and the 4-item control scale indeed capture two separate dimensions of parenting styles. To do this, I use all seven items in an explanatory factor analysis. As shown in Figure~\ref{fig:screeplot}, I indeed find two factors with an eigenvalue larger than one. Table~\ref{tab:factorloadings} presents the corresponding factor loadings after a Varimax rotation. Reassuringly, the first factor almost exclusively loads on items from the warmth scale, while the second factor loads on items of the control scale.
+
+\begin{figure}[h!]\centering
+    \caption{Scree plot of parenting style items}\label{fig:screeplot}
+    \includegraphics[width=0.65\textwidth]{../../out/figures/ps_screeplot.pdf} 
+    % \vspace{0.5em}
+    \caption*{\footnotesize \textbf{Notes:} This figure presents a scree plot of the eigenvalues from an exploratory factor analysis using seven items based on \citet{Perrisetal1980} and \citet{Schwarzetal1997} to measure parenting styles in the warmth and control dimensions, respectively.}
+\end{figure}
+
+In the main analysis of the paper, I therefore use the first principal component for each of the two scales. Hence, I allow for a potential correlation of the two dimensions of parenting styles (the correlation of the two factors equals 0.164). 
+
+\begin{table}[h!]
+    \caption{Rotated factor loadings of actual parenting styles}\label{tab:factorloadings}
+    \centering
+        \input{../../out/tables/ps_loadings.tex}
+    \vspace{0.5em}
+    \caption*{\footnotesize \textbf{Notes:} This table presents rotated factor loadings from an exploratory factor analysis using seven items based on \citet{Perrisetal1980} and \citet{Schwarzetal1997} to measure parenting styles in the warmth and control dimensions, respectively.}
+\end{table}
+
+
+\clearpage
+\section{Relevance of perceived returns for neighborhood characteristics}\label{app:predictivepower}
+\setcounter{table}{0}
+\setcounter{figure}{0}
+\setcounter{footnote}{0}
+
+In this section, I examine whether estimated returns in the neighborhood dimension are related to the quality of the neighborhood in which a family is living. I use two approaches to answer this question. First, the survey elicits the parents' agreement to three statements: (i) ``My neighborhood is a good place to raise children'', (ii) ``I feel safe in my neighborhood'', and (iii) ``My child attends a school of good quality'' on a 5-point scale. I extract a factor from these statements as a measure of the subjective neighborhood quality. Second, based on respondents' zipcodes, I merge county-level neighborhood characteristics from \citet{ChettyHendren2018Exposure,ChettyHendren2018County} to my survey data, and perform a second factor analysis that reveals two factors with eigenvalues larger than 1: a first factor capturing local economic conditions in a neighborhood, and a second factor related to measures of segregation and urbanization. Figure~\ref{fig:screeplot_nb} presents the corresponding scree plot, while Table~\ref{tab:factorloadings_nb} shows the rotated factor loadings of the underlying items. 
+
+\begin{figure}[h!]\centering
+    \caption{Scree plot of neighborhood quality indicators}\label{fig:screeplot_nb}
+    \includegraphics[width=0.65\textwidth]{../../out/figures/nb_screeplot.pdf} 
+    % \vspace{0.5em}
+    \caption*{\footnotesize \textbf{Notes:} This figure presents a scree plot of the eigenvalues from an exploratory factor analysis using 11 neighborhood characteristics taken from \citet{ChettyHendren2018Exposure,ChettyHendren2018County}.}
+\end{figure}
+
+\begin{table}[h!]
+    \caption{Rotated factor loadings of actual parenting styles}\label{tab:factorloadings_nb}
+    \centering
+        \input{../../out/tables/nb_loadings.tex} 
+    \vspace{0.5em}
+    \caption*{\footnotesize \textbf{Notes:} This table presents rotated factor loadings from an exploratory factor analysis using 11 neighborhood characteristics taken from \citet{ChettyHendren2018Exposure,ChettyHendren2018County}.}
+\end{table}
+
+
+\clearpage
+\section{Parenting styles in the National Longitudinal Survey of Youth 1997 (NLSY97)}\label{app:nlsy}
+\setcounter{table}{0}
+\setcounter{figure}{0}
+\setcounter{footnote}{0}
+
+\begin{table}[h!]
+    \caption{Gender differences in parenting styles (NLSY97)}\label{tab:nlsy_actualreturns}
+        \centering
+        \input{../../out/tables/nlsy97_actualreturns.tex}
+    \vspace{0.5em}
+    \caption*{\footnotesize \textbf{Notes:} This table uses data from the National Longitudinal Survey of Youth 1997 and regresses the child's log earnings in 2013 (i.e., when they are on average 30 years old) on the child's reports of each of its parents' parenting style. Columns (1) and (2) focus on the mother's warmth and control, while columns (3) and (4) report analogous regressions for fathers. Robust standard errors in parentheses.  *, **, and *** denote significance at the 10, 5, and 1 percent level.}
+\end{table}
+
+\begin{table}[h!]
+    \caption{Gender differences in parenting styles (NLSY97)}\label{tab:nlsy_ps_genderdiff}
+        \centering
+        \input{../../out/tables/nlsy97_psstyles_genderdiff.tex}
+    \vspace{0.5em}
+    \caption*{\footnotesize \textbf{Notes:} This table uses data from the National Longitudinal Survey of Youth 1997 and regresses the child's report of each of its parents' parenting style (measured by binary indicators) on an indicator for mothers. Columns (1) and (2) focus on the warmth dimension, while columns (3) and (4) focus on control. Control variables include the age and gender of the child, the parent's education, the log household income, and an indicator for whether both parents are present at home. Standard errors clustered on child-level in parentheses. *, **, and *** denote significance at the 10, 5, and 1 percent level.}
+\end{table}
+
+\end{document}

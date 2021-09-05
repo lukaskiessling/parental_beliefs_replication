@@ -1,0 +1,103 @@
+
+def build(ctx):
+
+    def out_data(*args):
+        return ctx.path_to(ctx, 'OUT_DATA', *args)
+
+    def out_analysis(*args):
+        return ctx.path_to(ctx, 'OUT_ANALYSIS', *args)
+
+    def out_tables(*args):
+        return ctx.path_to(ctx, 'OUT_TABLES', *args)
+
+    def out_figures(*args):
+        return ctx.path_to(ctx, 'OUT_FIGURES', *args)
+
+    ctx(
+        features='run_do_script',
+        source='01_summary_statistics.do',
+        target=[
+            out_analysis('log', '01_summary_statistics.log'),
+            out_tables('summary_statistics.tex')
+        ],
+        deps=[
+            out_data('data_crosssection.dta'),
+        ]
+    )
+
+    ctx(
+        features='run_do_script',
+        source='02_parental_beliefs_panel.do',
+        target=[
+            out_analysis('log', '02_parental_beliefs_panel.log'),
+            out_tables('scenarios_w.tex'),
+            out_tables('scenarios_ls.tex'),
+            out_tables('scenarios_main.tex'),
+            out_tables('scenarios_w_gender_age.tex'),
+            out_tables('scenarios_w_robustness.tex'),
+            out_figures('expected_earnings.pdf'),
+            out_figures('expected_earnings_color.pdf'),
+            out_figures('correlation_w_ls.pdf'),
+            out_figures('correlation_spearman_w_ls.pdf'),
+        ],
+        deps=[
+            out_data('data_panel.dta')
+        ]
+    )
+
+    ctx(
+        features='run_do_script',
+        source='03_parental_beliefs_crosssection.do',
+        target=[
+            out_analysis('log', '03_parental_beliefs_crosssection.log'),
+            out_tables('returns_w_production.tex'),
+            out_tables('returns_w_parvalues.tex'),
+            out_tables('returns_w_2.tex'),
+            out_tables('zero_returns_w_2.tex'),
+            out_figures('cdf_returns_w_2.pdf'),
+            out_figures('cdf_returns_w_warmth_2_gender.pdf'),
+            out_figures('cdf_returns_w_control_2_gender.pdf'),
+            out_figures('cdf_returns_w_neighborhood_2_gender.pdf'),
+            out_tables('zeroreturns_w_correlations.tex'),
+            out_tables('zeroreturns_ls_correlations.tex'),
+            out_figures('corr_returns_ind_warmth.pdf'),
+            out_figures('corr_returns_ind_control.pdf'),
+            out_figures('corr_returns_ind_neighborhood.pdf'),
+            out_figures('corr_returns_ind_warmth.png'),
+            out_figures('corr_returns_ind_control.png'),
+            out_figures('corr_returns_ind_neighborhood.png'),
+            out_tables('predictive_power_returns2.tex'),
+            out_tables('determinants_oriv.tex'),
+            out_tables('return_relationships_w_ls_2.tex'),
+            out_figures('ps_screeplot.pdf'),
+            out_tables('ps_loadings.tex'),
+        ],
+        deps=[
+            out_data('data_crosssection.dta'),
+        ]
+    )
+
+    ctx(
+        features='run_do_script',
+        source='04_predictive_power_neighborhoods.do',
+        target=[
+            out_analysis('log', '04_predictive_power_neighborhoods.log'),
+            out_figures('predictive_power_ps_hetero.pdf'),
+            out_figures('predictive_power_nb_hetero.pdf'),
+        ],
+        deps=[
+            out_data('data_crosssection.dta'),
+        ]
+    )
+
+    ctx(
+        features='run_do_script',
+        source='05_nlsy97.do',
+        target=[
+            out_tables('nlsy97_actualreturns.tex'),
+            out_tables('nlsy97_psstyles_genderdiff.tex'),
+        ],
+        deps=[
+            ctx.path_to(ctx, 'IN_DATA', 'nlsy97.csv')
+        ]
+    )

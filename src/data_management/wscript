@@ -1,0 +1,36 @@
+#! python
+
+def build(ctx):
+
+    ctx(
+        features='run_do_script',
+        source='preprocessing_data1.do',
+        target=[
+            ctx.path_to(ctx, 'OUT_DATA', 'log', 'preprocessing_data1.log'),
+            ctx.path_to(ctx, 'OUT_DATA', 'data_cleaned.dta'),
+            
+        ],
+        deps=[ctx.path_to(ctx, 'IN_DATA', 'survey_data.dta')]
+    )
+
+    ctx(
+        features='run_do_script',
+        source='preprocessing_data2.do',
+        target=[
+            ctx.path_to(ctx, 'OUT_DATA', 'log', 'preprocessing_data2.log'),
+            ctx.path_to(ctx, 'OUT_DATA', 'zip_to_tract_crosswalk.dta'),
+            ctx.path_to(ctx, 'OUT_DATA', 'poverty_county_data.dta'),
+            ctx.path_to(ctx, 'OUT_DATA', 'zipcode_covariates.dta'),
+            ctx.path_to(ctx, 'OUT_DATA', 'data_crosssection.dta'),
+            ctx.path_to(ctx, 'OUT_DATA', 'data_panel.dta'),
+            ctx.path_to(ctx, 'OUT_DATA', 'estimated_returns.dta'),
+            ctx.path_to(ctx, 'OUT_DATA', 'estimated_returns2.dta'),
+        ],
+        deps=[
+            ctx.path_to(ctx, 'IN_DATA', 'ZIP_TRACT_092018.csv'),
+            ctx.path_to(ctx, 'IN_DATA', 'PovertyEstimates.xls'),
+            ctx.path_to(ctx, 'IN_DATA', 'tract_covariates.dta'),
+            ctx.path_to(ctx, 'IN_DATA', 'online_table4-2.dta'),
+            ctx.path_to(ctx, 'OUT_DATA', 'data_cleaned.dta'),
+        ]
+    )
